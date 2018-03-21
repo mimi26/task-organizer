@@ -36,5 +36,18 @@ Task.destroy = id => {
     );
 };
 
+Task.update = (task, id) => {
+    return db.none(
+        `
+        UPDATE tasks SET
+        title = $1,
+        task = $2,
+        user_id = $3
+        WHERE id = $4
+        `,
+        [task.title, task.task, task.user_id, id]
+    );
+};
+
 module.exports = Task;
 

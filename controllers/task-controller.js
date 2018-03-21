@@ -22,4 +22,9 @@ taskController.destroy = async (req, res) => {
     res.send(task);
 }
 
+taskController.update = async (req, res) => {
+    const editedTask = await Task.update(req.body, req.params.id);
+    res.send(editedTask);
+}
+
 module.exports = taskController;
