@@ -26,5 +26,15 @@ Task.create = task => {
     );
 };
 
+Task.destroy = id => {
+    return db.none(
+        `
+        DELETE FROM tasks
+        WHERE id = $1
+        `,
+        [id]
+    );
+};
+
 module.exports = Task;
 

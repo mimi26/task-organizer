@@ -9,6 +9,8 @@ Router.get('/:id', taskController.show);
 
 Router.post('/', taskController.create);
 
+Router.delete('/:id', taskController.destroy);
+
 module.exports = Router;
 
 

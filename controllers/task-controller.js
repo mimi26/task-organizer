@@ -17,4 +17,9 @@ taskController.create = async (req, res) => {
     res.send(newTask);
 }
 
+taskController.destroy = async (req, res) => {
+    const task = await Task.destroy(req.params.id);
+    res.send(task);
+}
+
 module.exports = taskController;
