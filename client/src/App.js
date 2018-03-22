@@ -7,9 +7,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-
+      tasks: []
     }
     this.getTasks = this.getTasks.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -17,15 +18,25 @@ class App extends Component {
   }
 
   async getTasks () {
-    const tasks = await fetch('api/tasks');
-    console.log(await tasks.json());
+    let tasks = await fetch('api/tasks');
+    tasks = await tasks.json();
+    await this.setState({ tasks });
+  }
+
+  async handleDelete(id) {
+    const deleteTask = await fetch(`/api/tasks/${id}`, {
+      method: 'DELETE'
+    });
+    this.getTasks();
   }
 
   render() {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={(props) => <TaskList {...props} />} />
+          <Route exact path="/" component={(props) => <TaskList {...props} 
+                                        tasks={this.state.tasks}
+                                        handleDelete={this.handleDelete} />} />
         </Switch>
       </BrowserRouter>
     );
@@ -33,30 +44,3 @@ class App extends Component {
 }
 
 export default App;
-
-// componentDidMount() {
-//   if (this.state.currentPage === 'index') {
-//     fetch('/api/icecream')
-//       .then(res => res.json())
-//       .then(res => {
-//         this.setState({
-//           allIceCreams: res.data.icecreams,
-//           dataLoaded: true,
-//         });
-//       }).catch(err => console.log(err));
-//   } else if (this.state.currentPage === 'show' || this.state.currentPage === 'edit') {
-//     fetch(`/api/icecream/${this.state.currentId}`)
-//       .then(res => res.json())
-//       .then(res => {
-//         this.setState({
-//           currentIceCream: res.data.icecream,
-//           dataLoaded: true,
-//         })
-//       }).catch(err => console.log(err));
-//   } else if (this.state.currentPage === 'new') {
-//     this.setState({
-//       dataLoaded: true,
-//     })
-//   }
-// }
-       
