@@ -22,12 +22,12 @@ require('dotenv').config();
 const cookieParser = require('cookie-parser');
 app.use(cookieParser(process.env.SESSION_KEY));
 
-// const session = require('express-session');
-// app.use(session({
-//     secret: process.env.SESSION_KEY,
-//     resave: false,
-//     saveUninitialized: true
-// }));
+const session = require('express-session');
+app.use(session({
+    secret: process.env.SESSION_KEY,
+    resave: false,
+    saveUninitialized: true
+}));
 
 const passport = require('passport');
 app.use(passport.initialize());
@@ -43,6 +43,9 @@ app.use(passport.session());
 
 const taskRoutes = require('./routes/task-routes');
 app.use('/api/tasks', taskRoutes);
+
+const authRoutes = require('./routes/auth-routes.js');
+app.use('/auth', authRoutes);
 
 app.use('*', (req, res) => {
     res.status(404).send('Not Found');
