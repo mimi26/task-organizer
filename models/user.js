@@ -24,3 +24,5 @@ User.createUser = user => {
     );
 };
 
+module.exports = User;
+

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
+import RegisterFrom from './components/RegisterForm';
+import LogInForm from './components/LogInForm';
 
 class App extends Component {
   constructor() {
@@ -19,6 +22,8 @@ class App extends Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.renderAddButtonOrForm = this.renderAddButtonOrForm.bind(this);
     this.handleTaskSubmit = this.handleTaskSubmit.bind(this);
+    this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
+    this.handleLogInSubmit = this.handleLogInSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -26,9 +31,12 @@ class App extends Component {
   }
 
   async getTasks() {
-    let tasks = await fetch('api/tasks');
-    tasks = await tasks.json();
-    await this.setState({ tasks });
+    try {
+      let tasks = await axios('api/tasks');
+      this.setState({ tasks: tasks.data });
+    } catch (error){
+      console.log(error);
+    }
   }
 
   async handleDelete(id) {
@@ -39,7 +47,6 @@ class App extends Component {
   }
   
   async handleTaskSubmit(event, method, data, id = '') {
-    console.log("this is data:", data);
     event.preventDefault();
     await fetch(`/api/tasks/${id}`, {
       method: method,
@@ -55,22 +62,29 @@ class App extends Component {
     this.getTasks();
   }
 
-  // iceCreamSubmit(method, event, data, id) {
-  //   event.preventDefault();
-  //   fetch(`/api/icecream/${id || ''}`, {
-  //     method: method,
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(data),
-  //   }).then(res => res.json())
-  //     .then(res => {
-  //       this.setState({
-  //         fireRedirect: true,
-  //         redirectPath: `/ice-cream/${res.data.icecream.id}`,
-  //       })
-  //     });
-  // }
+  async handleRegisterSubmit(event, data) {
+    event.preventDefault();
+    try {
+      await axios(`http://localhost:3001/auth/register`, {
+        method: 'POST',
+        data: data
+      });
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
+  async handleLogInSubmit(event, data) {
+    event.preventDefault();
+    try {
+      await axios('http://localhost:3001/auth/login', {
+        method: 'POST',
+        data: data
+      });
+    } catch(error) {
+      console.log(error);
+    }
+  }
 
   handleAddTask() {
     this.setState({ isAdding: true });
@@ -98,6 +112,8 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
+          <RegisterFrom handleRegisterSubmit={this.handleRegisterSubmit} />
+          <LogInForm handleLogInSubmit={this.handleLogInSubmit} />
           <Switch>
             <Route exact path="/" component={(props) => <TaskList {...props} 
                                           tasks={this.state.tasks}

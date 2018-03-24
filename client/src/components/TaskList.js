@@ -14,8 +14,8 @@ class TaskList extends Component {
                 this.props.tasks.map(task => {
                         return (
                             <div key={task.id}>
-                                {task.title}
-                                {task.task}
+                                Task:{task.title}<br />
+                                Description/Comments:{task.task}
                                 <button onClick={() => this.props.handleEdit(task)}>Edit Task</button>
                                 <button onClick={() => this.props.handleDelete(task.id)}>Delete Task</button>
                             </div>

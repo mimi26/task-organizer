@@ -1,5 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const jwt = require('jsonwebtoken');
 
 const init = require('./passport');
 const User = require('../../models/user');
@@ -19,7 +20,11 @@ passport.use(
             if(!authHelpers.comaperPass(password, user.password_digest)) {
                 return done(null, false);
             } else {
-                return done(null, user);
+                const token = jwt.sign({ id: user.id, username: user.username }, process.env.SESSION_KEY, {
+                    expiresIn: 604800 // 1 WEEK
+                });
+                
+                return done(null, token, user);
             }
         }).catch(err => {
             console.log(err);

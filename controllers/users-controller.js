@@ -5,8 +5,9 @@ const usersController = {};
 
 usersController.create = (req, res) => {
     const salt = bcrypt.genSaltSync();
-    const hash = bcrypt.hashSync(req.body.password, salt);
-    User.create({
+    const hash = bcrypt.hashSync(req.body.password_digest, salt);
+    console.log("this is req.body:", req.body)
+    User.createUser({
         username: req.body.username,
         email: req.body.email,
         password_digest: hash
@@ -19,5 +20,7 @@ usersController.create = (req, res) => {
         res.status(500).json({ error });
     });
 }
+
+
 
 module.exports = usersController;
