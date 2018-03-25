@@ -5,7 +5,7 @@ class LogInForm extends Component {
         super();
         this.state = {
             username: '',
-            password_digest: ''
+            password: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
@@ -39,8 +39,8 @@ class LogInForm extends Component {
                         onChange={this.handleChange} />
                     <label>Password:</label>
                     <input type="password"
-                        value={this.state.password_digest}
-                        name="password_digest"
+                        value={this.state.password}
+                        name="password"
                         onChange={this.handleChange} />
                     <input type="submit" value="Submit" />
                 </form>

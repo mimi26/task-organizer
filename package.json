@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "concurrently \"npm run dev\" \"npm run client\"",
+    "start": "concurrently \"npm run debugger\" \"npm run client\"",
     "dev": "nodemon server.js",
     "client": "node start-client.js",
     "test": "echo \"Error: no test specified\" && exit 1",

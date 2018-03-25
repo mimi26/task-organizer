@@ -77,10 +77,11 @@ class App extends Component {
   async handleLogInSubmit(event, data) {
     event.preventDefault();
     try {
-      await axios('http://localhost:3001/auth/login', {
+      const login = await axios('http://localhost:3001/auth/login', {
         method: 'POST',
         data: data
       });
+      console.log('this is login:', login);
     } catch(error) {
       console.log(error);
     }
