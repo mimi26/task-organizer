@@ -6,6 +6,7 @@ import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 import RegisterFrom from './components/RegisterForm';
 import LogInForm from './components/LogInForm';
+import Logout from './components/Logout';
 
 class App extends Component {
   constructor() {
@@ -13,7 +14,8 @@ class App extends Component {
     this.state = {
       tasks: [],
       isAdding: false,
-      taskToEdit: ''
+      taskToEdit: '',
+      isLoggedIn: this.isUserAuthenticated()
     };
 
     this.getTasks = this.getTasks.bind(this);
@@ -24,6 +26,7 @@ class App extends Component {
     this.handleTaskSubmit = this.handleTaskSubmit.bind(this);
     this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
     this.handleLogInSubmit = this.handleLogInSubmit.bind(this);
+    this.isUserAuthenticated = this.isUserAuthenticated.bind(this);
   }
 
   componentDidMount() {
@@ -81,10 +84,15 @@ class App extends Component {
         method: 'POST',
         data: data
       });
-      console.log('this is login:', login);
+      localStorage.setItem("token", login.data.token);
+      localStorage.setItem("user", login.data.userData.username);
     } catch(error) {
       console.log(error);
     }
+  }
+
+  isUserAuthenticated() {
+    return localStorage.getItem('token') !== null;
   }
 
   handleAddTask() {
@@ -115,6 +123,7 @@ class App extends Component {
         <div>
           <RegisterFrom handleRegisterSubmit={this.handleRegisterSubmit} />
           <LogInForm handleLogInSubmit={this.handleLogInSubmit} />
+          <Logout />
           <Switch>
             <Route exact path="/" component={(props) => <TaskList {...props} 
                                           tasks={this.state.tasks}
