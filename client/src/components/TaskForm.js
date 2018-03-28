@@ -10,6 +10,10 @@ class TaskForm extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
+    // getUserId() {
+    //   this.setState({ user_id: localStorage.getItem('id') });
+    // }
+
     handleInputChange(e) {
         const name = e.target.name;
         const val = e.target.value;

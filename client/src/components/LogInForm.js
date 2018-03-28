@@ -16,7 +16,7 @@ class LogInForm extends Component {
         this.setState({
             username: '',
             email: '',
-            password_digest: ''
+            password: ''
         });
     }
 
