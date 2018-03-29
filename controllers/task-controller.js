@@ -3,7 +3,7 @@ const Task = require('../models/task');
 const taskController = {};
 
 taskController.index = async (req, res) => {
-    const tasks = await Task.findAll();
+    const tasks = await Task.findAll(req.params.user);
     res.send(tasks);
 }
 

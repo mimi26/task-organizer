@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
@@ -12,13 +12,14 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      tasks: [],
+      //tasks: [],
       isAdding: false,
       taskToEdit: '',
-      isLoggedIn: this.isUserAuthenticated()
+      isLoggedIn: this.isUserAuthenticated(),
+      currentUser: ''
     };
 
-    this.getTasks = this.getTasks.bind(this);
+    //this.getTasks = this.getTasks.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
@@ -28,20 +29,12 @@ class App extends Component {
     this.handleLogInSubmit = this.handleLogInSubmit.bind(this);
     this.isUserAuthenticated = this.isUserAuthenticated.bind(this);
     this.handleLogOutSubmit = this.handleLogOutSubmit.bind(this);
+    this.getUser = this.getUser.bind(this);
   }
 
-  componentDidMount() {
-    this.getTasks();
-  }
-
-  async getTasks() {
-    try {
-      let tasks = await axios('api/tasks');
-      this.setState({ tasks: tasks.data });
-    } catch (error){
-      console.log(error);
-    }
-  }
+  // componentDidMount() {
+  //   this.getTasks();
+  // }
 
   async handleDelete(id) {
     await fetch(`api/tasks/${id}`, {
@@ -95,11 +88,11 @@ class App extends Component {
         method: 'POST',
         data: data
       });
-      console.log(login);
       localStorage.setItem("token", login.data.token);
       localStorage.setItem("user", login.data.userData.username);
       localStorage.setItem("id", login.data.userData.id);
       this.setState({ isLoggedIn: this.isUserAuthenticated() });
+      this.getUser();
     } catch(error) {
       console.log(error);
     }
@@ -108,15 +101,22 @@ class App extends Component {
   async handleLogOutSubmit(event) {
     event.preventDefault();
     try {
-      await axios.post('auth/logout');
+      await axios.post('http://localhost:3001/auth/logout');
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       localStorage.removeItem('id');
-      this.setState({ isLoggedIn: this.isUserAuthenticated() });
+      this.setState({ 
+        isLoggedIn: this.isUserAuthenticated(),
+        currentUser: ''
+       });
     }
     catch (error) {
       console.log(error);
     }
+  }
+
+  getUser() {
+    this.setState({ currentUser: localStorage.getItem('id') });
   }
 
   isUserAuthenticated() {
@@ -150,18 +150,22 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <RegisterFrom handleRegisterSubmit={this.handleRegisterSubmit} />
-          <LogInForm handleLogInSubmit={this.handleLogInSubmit} />
+          {/* <LogInForm handleLogInSubmit={this.handleLogInSubmit} /> */}
           <Logout handleLogOutSubmit={this.handleLogOutSubmit}/>
           <Switch>
-            <Route exact path="/" component={(props) => <TaskList {...props} 
-                                          tasks={this.state.tasks}
+            <Route exact path="/" component={props => <LogInForm {...props}
+                                          handleLogInSubmit={this.handleLogInSubmit} />} />}
+            <Route path="/tasks/:user" component={(props) => <TaskList {...props} 
+                                          //tasks={this.state.tasks}
                                           handleDelete={this.handleDelete}
                                           handleEdit={this.handleEdit}
                                           taskToEdit={this.state.taskToEdit}
                                           isAdding={this.state.isAdding} 
                                           handleTaskSubmit={this.handleTaskSubmit} />} />
+            
           </Switch>
           {this.renderAddButtonOrForm()}
+          {(this.state.currentUser) && <Redirect to={`/tasks/${this.state.currentUser}`} />}
         </div>
       </BrowserRouter>
     );

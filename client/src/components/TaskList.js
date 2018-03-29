@@ -1,7 +1,31 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import TaskForm from './TaskForm';
 
 class TaskList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            tasks: [],
+            currentUser: props.match.params.user
+        }
+        this.getTasks = this.getTasks.bind(this);
+    }
+
+    async getTasks() {
+        let userId = this.state.currentUser;
+        try {
+            let tasks = await axios(`http://localhost:3001/api/tasks/${userId}`);
+            this.setState({ tasks: tasks.data });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    componentWillMount() {
+        this.getTasks();
+    }
+
     renderTaskOrEditForm() {
         if (this.props.taskToEdit) {
             return (
@@ -11,7 +35,7 @@ class TaskList extends Component {
             );
         } else {
             return (
-                this.props.tasks.map(task => {
+                this.state.tasks.map(task => {
                         return (
                             <div key={task.id}>
                                 Task:{task.title}<br />

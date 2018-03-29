@@ -2,8 +2,13 @@ const db = require('../db/config');
 
 const Task = {};
 
-Task.findAll = () => {
-    return db.query('SELECT * FROM tasks ORDER BY id ASC');
+Task.findAll = userId => {
+    return db.query(
+        `SELECT * FROM tasks 
+        WHERE user_id = $1 
+        ORDER BY id ASC`,
+        [userId]
+    );
 };
 
 Task.findById = id => {
