@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
+
+import Home from './components/Home';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
-import RegisterFrom from './components/RegisterForm';
 import LogInForm from './components/LogInForm';
 import Logout from './components/Logout';
+import RegisterForm from './components/RegisterForm';
 
 class App extends Component {
   constructor() {
@@ -149,13 +151,15 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <RegisterFrom handleRegisterSubmit={this.handleRegisterSubmit} />
           {/* <LogInForm handleLogInSubmit={this.handleLogInSubmit} /> */}
           <Logout handleLogOutSubmit={this.handleLogOutSubmit}/>
           <Switch>
-            <Route exact path="/" component={props => <LogInForm {...props}
-                                          handleLogInSubmit={this.handleLogInSubmit} />} />}
-            <Route path="/tasks/:user" component={(props) => <TaskList {...props} 
+            <Route exact path='/' component={Home} />
+            <Route path='/register' component={props => <RegisterForm {...props}
+                                          handleRegisterSubmit={this.handleRegisterSubmit} />} />
+            <Route path="/login" component={props => <LogInForm {...props}
+                                          handleLogInSubmit={this.handleLogInSubmit} />} />
+            <Route path='/tasks/:user' component={(props) => <TaskList {...props} 
                                           //tasks={this.state.tasks}
                                           handleDelete={this.handleDelete}
                                           handleEdit={this.handleEdit}
