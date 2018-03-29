@@ -33,6 +33,10 @@ const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+}
+
 // app.use((req, res, next) => {
 //     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
 //     res.header("Access-Control-Allow-Credentials", "true");
