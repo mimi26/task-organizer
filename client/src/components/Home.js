@@ -3,13 +3,24 @@ import { Link } from 'react-router-dom';
 //import Logout from './Logout';
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userId: localStorage.getItem('id') ? localStorage.getItem('id') : '',
+            userName: localStorage.getItem('user') ? localStorage.getItem('user') : ''
+        }
+    }
+
+    componentDidMount() {
+        this.getUser();
+    }
 
     renderLogInOrWelcome() {
-        if(this.props.currentUserName) {
+        if(this.state.userName) {
             return(
                 <div>
-                    <h1>Welcome Back {this.props.currentUserName}!</h1>
-                    <Link to={`/tasks/${this.props.currentUserId}`}>Manage your tasks</Link>
+                    <h1>Welcome Back {this.state.userName}!</h1>
+                    <Link to={`/tasks/${this.state.userId}`}>Manage your tasks</Link>
                     {/* <Logout /> */}
                 </div>
             );
@@ -26,6 +37,14 @@ class Home extends Component {
             );
         }
     }
+
+    getUser() {
+        this.setState({ 
+            userId: localStorage.getItem('id'),
+            userName: localStorage.getItem('user')
+        });
+    }
+
     render() {
         return (
             <div>
