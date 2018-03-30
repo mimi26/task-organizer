@@ -1,29 +1,28 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import TaskForm from './TaskForm';
 
 class TaskList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            tasks: [],
-            currentUser: props.match.params.user
-        }
-        this.getTasks = this.getTasks.bind(this);
-    }
 
-    async getTasks() {
-        let userId = this.state.currentUser;
-        try {
-            let tasks = await axios(`http://localhost:3001/api/tasks/${userId}`);
-            this.setState({ tasks: tasks.data });
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // componentWillMount() {
+    //     this.props.getTasks();
+    // }
 
-    componentWillMount() {
-        this.getTasks();
+    renderAddButtonOrForm() {
+        if (this.props.currentUserName) {
+            if (this.props.isAdding) {
+                return (
+                    <TaskForm isAdding={this.props.isAdding}
+                        taskToEdit={this.props.taskToEdit}
+                        handleTaskSubmit={this.props.handleTaskSubmit} />
+                );
+            } else {
+                return (
+                    <button onClick={this.handleAddTask}>Add New Task</button>
+                );
+            }
+        } else {
+            return null;
+        }
     }
 
     renderTaskOrEditForm() {
@@ -35,7 +34,7 @@ class TaskList extends Component {
             );
         } else {
             return (
-                this.state.tasks.map(task => {
+                this.props.tasks.map(task => {
                         return (
                             <div key={task.id}>
                                 Task:{task.title}<br />
@@ -54,6 +53,7 @@ class TaskList extends Component {
             <div>
                 <h1>Things to do:</h1>
                 {this.renderTaskOrEditForm()}
+                {this.renderAddButtonOrForm()}
             </div>
         );
     }
