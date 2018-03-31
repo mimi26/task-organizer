@@ -18,6 +18,7 @@ class App extends Component {
       isAdding: false,
       taskToEdit: '',
       isLoggedIn: false,
+      isRegistered: false,
       currentUserId: localStorage.getItem('id') ? localStorage.getItem('id') : '',
       currentUserName: localStorage.getItem('user') ? localStorage.getItem('user') : ''
     };
@@ -31,7 +32,6 @@ class App extends Component {
     this.handleLogInSubmit = this.handleLogInSubmit.bind(this);
     this.isUserAuthenticated = this.isUserAuthenticated.bind(this);
     this.handleLogOutSubmit = this.handleLogOutSubmit.bind(this);
-    // this.getUser = this.getUser.bind(this);
   }
 
   componentDidMount() {
@@ -51,13 +51,6 @@ class App extends Component {
         console.log(error);
       }
     }
-  }
-
-  async handleDelete(id) {
-    await fetch(`api/tasks/${id}`, {
-      method: 'DELETE'
-    });
-    this.getTasks();
   }
   
   async handleTaskSubmit(event, method, data, id = '') {
@@ -86,13 +79,21 @@ class App extends Component {
     this.getTasks();
   }
 
+  async handleDelete(id) {
+    await fetch(`http://localhost:3001/api/tasks/${id}`, {
+      method: 'DELETE'
+    });
+    this.getTasks();
+  }
+
   async handleRegisterSubmit(event, data) {
     event.preventDefault();
     try {
-        await axios(`auth/register`, {
+        await axios(`http://localhost:3001/auth/register`, {
         method: 'POST',
         data: data
       });
+      this.setState({ isRegistered: true });
     } catch(error) {
       console.log(error)
     }
@@ -101,7 +102,7 @@ class App extends Component {
   async handleLogInSubmit(event, data) {
     event.preventDefault();
     try {
-      const login = await axios('auth/login', {
+      const login = await axios('http://localhost:3001/auth/login', {
         method: 'POST',
         data: data
       });
@@ -128,17 +129,14 @@ class App extends Component {
       this.setState({ 
         isLoggedIn: false,
         currentUserId: '',
-        currentUserName: ''
+        currentUserName: '',
+        tasks: []
        });
     }
     catch (error) {
       console.log(error);
     }
   }
-
-  // getUser() {
-  //   this.setState({ currentUser: localStorage.getItem('id') })
-  // }
 
   isUserAuthenticated() {
     if(localStorage.getItem('token') !== null) {
@@ -188,6 +186,7 @@ class App extends Component {
           {(this.state.isLoggedIn) 
               ? <Redirect to={`/tasks/${this.state.currentUserId}`} /> 
               : <Redirect to='/' />}
+          {this.state.isRegistered && <Redirect to='/login' />}
         </div>
       </BrowserRouter>
     );

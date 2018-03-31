@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class RegisterForm extends Component {
     constructor() {
@@ -50,7 +51,7 @@ class RegisterForm extends Component {
                             onChange={this.handleChange} />
                     <input type="submit" value="Submit"/>
                 </form>
-
+                <Link to='/'>Return to Home page</ Link>
             </div>
         );
     }

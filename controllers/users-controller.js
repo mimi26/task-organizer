@@ -12,6 +12,7 @@ usersController.create = (req, res) => {
         email: req.body.email,
         password_digest: hash
     }).then(user => {
+        res.send(user);
         req.login(user, (err) => {
             if (err) return next(err);
         })

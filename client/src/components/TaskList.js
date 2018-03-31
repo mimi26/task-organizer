@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import TaskForm from './TaskForm';
 import Logout from './Logout';
@@ -10,6 +11,25 @@ class TaskList extends Component {
         this.state = {
             userId: localStorage.getItem('id') ? localStorage.getItem('id') : '',
             userName: localStorage.getItem('user') ? localStorage.getItem('user') : '',
+            tasks: []
+        }
+        this.getTasks = this.getTasks.bind(this);
+    }
+
+    componentDidMount() {
+        this.getTasks();
+    }
+
+    async getTasks() {
+        let userId = this.state.userId;
+        if (userId) {
+            console.log(userId);
+            try {
+                let tasks = await axios(`http://localhost:3001/api/tasks/${userId}`);
+                this.setState({ tasks: tasks.data });
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 
@@ -40,7 +60,7 @@ class TaskList extends Component {
             );
         } else {
             return (
-                this.props.tasks.map(task => {
+                this.state.tasks.map(task => {
                         return (
                             <div key={task.id}>
                                 Task:{task.title}<br />

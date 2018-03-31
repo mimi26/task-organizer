@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class LogInForm extends Component {
     constructor() {
@@ -44,7 +45,7 @@ class LogInForm extends Component {
                         onChange={this.handleChange} />
                     <input type="submit" value="Submit" />
                 </form>
-                
+                <Link to='/'>Return to Home page</ Link>
             </div>
         );
     }
