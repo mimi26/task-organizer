@@ -25,7 +25,7 @@ class TaskList extends Component {
         if (userId) {
             console.log(userId);
             try {
-                let tasks = await axios(`http://localhost:3001/api/tasks/${userId}`);
+                let tasks = await axios(`api/tasks/${userId}`);
                 this.setState({ tasks: tasks.data });
             } catch (error) {
                 console.log(error);
