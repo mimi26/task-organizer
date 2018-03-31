@@ -17,7 +17,7 @@ function setDatabase() {
             host: 'localhost'
         });
     } else if (process.env.NODE_ENV === 'production') {
-        return pgp(process.env.DATABASE_URL + '?ssl=true');
+        return pgp('postgres://ankouvidkrkner:61de36ce0ede93205f55a639a7c3c9c7bfa40fc3d1676a128e7b7d9e99b9aa0c@ec2-184-72-219-186.compute-1.amazonaws.com:5432/d2gdcm1dna24i6');
     }
 }
 
