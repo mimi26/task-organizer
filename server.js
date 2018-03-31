@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.get('*', function (request, response) {
-    response.sendFile(__dirname + '/dist/index.html');
+    response.sendFile(__dirname + 'client/build/index.html');
 });
 
 // app.use((req, res, next) => {
