@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-//import Logout from './Logout';
+import Logout from './Logout';
 
 class Home extends Component {
     constructor(props) {
@@ -11,17 +11,13 @@ class Home extends Component {
         }
     }
 
-    componentDidMount() {
-        this.getUser();
-    }
-
     renderLogInOrWelcome() {
         if(this.state.userName) {
             return(
                 <div>
                     <h1>Welcome Back {this.state.userName}!</h1>
                     <Link to={`/tasks/${this.state.userId}`}>Manage your tasks</Link>
-                    {/* <Logout /> */}
+                    <Logout handleLogOutSubmit={this.props.handleLogOutSubmit} />
                 </div>
             );
         } else {
@@ -36,13 +32,6 @@ class Home extends Component {
                 </div>
             );
         }
-    }
-
-    getUser() {
-        this.setState({ 
-            userId: localStorage.getItem('id'),
-            userName: localStorage.getItem('user')
-        });
     }
 
     render() {

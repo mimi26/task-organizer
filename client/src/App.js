@@ -159,14 +159,15 @@ class App extends Component {
       <BrowserRouter>
         <div>
           {/* <LogInForm handleLogInSubmit={this.handleLogInSubmit} /> */}
-          <Logout handleLogOutSubmit={this.handleLogOutSubmit}/>
+          {/* <Logout handleLogOutSubmit={this.handleLogOutSubmit}/> */}
           <Switch>
             <Route exact path='/' component={props => <Home {...props}
                                           currentUserName={this.state.currentUserName}
                                           currentUserId={this.state.currentUserId} /> }
                                           isAdding={this.state.isAdding}
                                           taskToEdit={this.state.taskToEdit}
-                                          handleTaskSubmit={this.handleTaskSubmit} />
+                                          handleTaskSubmit={this.handleTaskSubmit}
+                                          handleLogOutSubmit={this.handleLogOutSubmit} />
             <Route path='/register' component={props => <RegisterForm {...props}
                                           handleRegisterSubmit={this.handleRegisterSubmit} />} />
             <Route path="/login" component={props => <LogInForm {...props}
@@ -179,10 +180,14 @@ class App extends Component {
                                           isAdding={this.state.isAdding} 
                                           handleTaskSubmit={this.handleTaskSubmit}
                                           getTasks={this.getTasks}
-                                          currentUserName={this.state.currentUserName} />} />
+                                          currentUserName={this.state.currentUserName}
+                                          handleAddTask={this.handleAddTask}
+                                          handleLogOutSubmit={this.handleLogOutSubmit} />} />
             
           </Switch>
-          {(this.state.isLoggedIn) ? <Redirect to='/' /> : null}
+          {(this.state.isLoggedIn) 
+              ? <Redirect to={`/tasks/${this.state.currentUserId}`} /> 
+              : <Redirect to='/' />}
         </div>
       </BrowserRouter>
     );

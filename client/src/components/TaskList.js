@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import TaskForm from './TaskForm';
+import Logout from './Logout';
 
 class TaskList extends Component {
-
-    // componentWillMount() {
-    //     this.props.getTasks();
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            userId: localStorage.getItem('id') ? localStorage.getItem('id') : '',
+            userName: localStorage.getItem('user') ? localStorage.getItem('user') : '',
+        }
+    }
 
     renderAddButtonOrForm() {
-        if (this.props.currentUserName) {
+        if (this.state.userName) {
             if (this.props.isAdding) {
                 return (
                     <TaskForm isAdding={this.props.isAdding}
@@ -17,7 +23,7 @@ class TaskList extends Component {
                 );
             } else {
                 return (
-                    <button onClick={this.handleAddTask}>Add New Task</button>
+                    <button onClick={this.props.handleAddTask}>Add New Task</button>
                 );
             }
         } else {
@@ -51,9 +57,11 @@ class TaskList extends Component {
     render() {
         return (
             <div>
-                <h1>Things to do:</h1>
+                <h1>{this.state.userName}'s Tasks:</h1>
                 {this.renderTaskOrEditForm()}
                 {this.renderAddButtonOrForm()}
+                <Logout handleLogOutSubmit={this.props.handleLogOutSubmit} />
+                <Link to='/'>click here to return to home page</ Link>
             </div>
         );
     }

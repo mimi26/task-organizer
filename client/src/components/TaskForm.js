@@ -36,7 +36,7 @@ class TaskForm extends Component {
                    <label>Task Description:</label>
                    <input   type="text" 
                             onChange={this.handleInputChange} 
-                            value={this.state.text} 
+                            value={this.state.task} 
                             name="task" />
                     <input type="submit" value="submit" />
                 </form>                
