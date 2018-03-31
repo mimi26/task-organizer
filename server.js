@@ -52,7 +52,7 @@ const authRoutes = require('./routes/auth-routes.js');
 app.use('/auth', authRoutes);
 
 app.use('*', (req, res) => {
-    res.status(404).send('Page Not Found');
+    res.status(404).send('Not Found');
 });
 
 app.use((err, req, res, next) => {
