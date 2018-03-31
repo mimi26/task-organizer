@@ -43,7 +43,7 @@ class App extends Component {
     if(userId) { 
       console.log(userId);
       try {
-        let tasks = await axios(`/api/tasks/${userId}`);
+        let tasks = await axios(`https://desolate-gorge-81835.herokuapp.com/api/tasks/${userId}`);
         this.setState({ tasks: tasks.data });
       } catch (error) {
         console.log(error);
@@ -56,7 +56,7 @@ class App extends Component {
     console.log(data);
     const user_id = localStorage.getItem('id');
     try {
-      await fetch(`/api/tasks/${id}`, {
+      await fetch(`https://desolate-gorge-81835.herokuapp.com/api/tasks/${id}`, {
       method: method,
       headers: {
         'Content-Type': 'application/json'
@@ -78,7 +78,7 @@ class App extends Component {
   }
 
   async handleDelete(id) {
-    await fetch(`/api/tasks/${id}`, {
+    await fetch(`https://desolate-gorge-81835.herokuapp.com/api/tasks/${id}`, {
       method: 'DELETE'
     });
     this.getTasks();
@@ -87,7 +87,7 @@ class App extends Component {
   async handleRegisterSubmit(event, data) {
     event.preventDefault();
     try {
-        await axios(`/auth/register`, {
+      await axios(`https://desolate-gorge-81835.herokuapp.com/auth/register`, {
         method: 'POST',
         data: data
       });
@@ -100,7 +100,7 @@ class App extends Component {
   async handleLogInSubmit(event, data) {
     event.preventDefault();
     try {
-      const login = await axios('/auth/login', {
+      const login = await axios('https://desolate-gorge-81835.herokuapp.com/auth/login', {
         method: 'POST',
         data: data
       });
@@ -120,7 +120,7 @@ class App extends Component {
   async handleLogOutSubmit(event) {
     event.preventDefault();
     try {
-      await axios.post('/auth/logout');
+      await axios.post('https://desolate-gorge-81835.herokuapp.com/auth/logout');
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       localStorage.removeItem('id');
