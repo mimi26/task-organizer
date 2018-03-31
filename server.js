@@ -37,9 +37,9 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 }
 
-app.get('*', function (request, response) {
-    response.sendFile(__dirname + '/index.html');
-});
+app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+    });
 
 // app.use((req, res, next) => {
 //     res.header("Access-Control-Allow-Origin", "http://modest-babbage-a37f04.bitballoon.com");
