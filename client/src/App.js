@@ -37,7 +37,7 @@ class App extends Component {
   componentDidMount() {
     // this.getUser();
     this.isUserAuthenticated();
-    this.getTasks();
+    // this.getTasks();
   }
 
   async getTasks() {
