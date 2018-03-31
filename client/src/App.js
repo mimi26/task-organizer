@@ -5,9 +5,7 @@ import axios from 'axios';
 
 import Home from './components/Home';
 import TaskList from './components/TaskList';
-import TaskForm from './components/TaskForm';
 import LogInForm from './components/LogInForm';
-import Logout from './components/Logout';
 import RegisterForm from './components/RegisterForm';
 
 class App extends Component {
