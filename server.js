@@ -37,6 +37,10 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 }
 
+app.get('*', function (request, response) {
+    response.sendFile(__dirname + '/dist/index.html');
+});
+
 // app.use((req, res, next) => {
 //     res.header("Access-Control-Allow-Origin", "http://modest-babbage-a37f04.bitballoon.com");
 //     res.header("Access-Control-Allow-Credentials", "true");
