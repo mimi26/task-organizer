@@ -18,16 +18,13 @@ class TaskList extends Component {
 
     componentDidMount() {
         this.getTasks();
-        console.log('this is tasks:', this.state.tasks);
     }
 
     async getTasks() {
         let userId = parseInt(this.state.userId);
-        console.log('this is usreid:', userId);
         if (userId) {
             try {
                 let tasks = await axios(`https://desolate-gorge-81835.herokuapp.com/api/tasks/${userId}`);
-                console.log(tasks);
                 this.setState({ tasks: tasks.data });
             } catch (error) {
                 console.log(error);

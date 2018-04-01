@@ -110,7 +110,6 @@ class App extends Component {
         isLoggedIn: true
        });
       //  this.getTasks();
-      console.log('this is login:', login);
     } catch(error) {
       console.log(error);
     }
