@@ -22,7 +22,7 @@ class TaskList extends Component {
     }
 
     async getTasks() {
-        let userId = this.state.userId;
+        let userId = parseInt(this.state.userId);
         console.log('this is usreid:', userId);
         if (userId) {
             try {
