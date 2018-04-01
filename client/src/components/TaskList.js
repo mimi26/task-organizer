@@ -35,23 +35,23 @@ class TaskList extends Component {
         }
     }
 
-    renderAddButtonOrForm() {
-        if (this.state.userName) {
-            if (this.props.isAdding) {
-                return (
-                    <TaskForm isAdding={this.props.isAdding}
-                        taskToEdit={this.props.taskToEdit}
-                        handleTaskSubmit={this.props.handleTaskSubmit} />
-                );
-            } else {
-                return (
-                    <button onClick={this.props.handleAddTask}>Add New Task</button>
-                );
-            }
-        } else {
-            return null;
-        }
-    }
+    // renderAddButtonOrForm() {
+    //     if (this.state.userName) {
+    //         if (this.props.isAdding) {
+    //             return (
+    //                 <TaskForm isAdding={this.props.isAdding}
+    //                     taskToEdit={this.props.taskToEdit}
+    //                     handleTaskSubmit={this.props.handleTaskSubmit} />
+    //             );
+    //         } else {
+    //             return (
+    //                 <button onClick={this.props.handleAddTask}>Add New Task</button>
+    //             );
+    //         }
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
     // renderTaskOrEditForm() {
     //     if (this.props.taskToEdit) {
@@ -83,7 +83,7 @@ class TaskList extends Component {
             <div>
                 <h1>{this.state.userName}'s Tasks:</h1>
                 {/* {this.renderTaskOrEditForm()} */}
-                {this.renderAddButtonOrForm()}
+                {/* {this.renderAddButtonOrForm()} */}
                 <Logout handleLogOutSubmit={this.props.handleLogOutSubmit} />
                 <Link to='/'>click here to return to home page</ Link>
             </div>
