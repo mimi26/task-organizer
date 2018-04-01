@@ -35,48 +35,48 @@ class TaskList extends Component {
         }
     }
 
-    // renderAddButtonOrForm() {
-    //     if (this.state.userName) {
-    //         if (this.props.isAdding) {
-    //             return (
-    //                 <TaskForm isAdding={this.props.isAdding}
-    //                     taskToEdit={this.props.taskToEdit}
-    //                     handleTaskSubmit={this.props.handleTaskSubmit} />
-    //             );
-    //         } else {
-    //             return (
-    //                 <button onClick={this.props.handleAddTask}>Add New Task</button>
-    //             );
-    //         }
-    //     } else {
-    //         return null;
-    //     }
-    // }
+    renderAddButtonOrForm() {
+        if (this.state.userName) {
+            if (this.props.isAdding) {
+                return (
+                    <TaskForm isAdding={this.props.isAdding}
+                        taskToEdit={this.props.taskToEdit}
+                        handleTaskSubmit={this.props.handleTaskSubmit} />
+                );
+            } else {
+                return (
+                    <button onClick={this.props.handleAddTask}>Add New Task</button>
+                );
+            }
+        } else {
+            return null;
+        }
+    }
 
-    // renderTaskOrEditForm() {
-    //     if (this.props.taskToEdit) {
-    //         return (
-    //             <TaskForm isAdding={this.props.isAdding}
-    //                 taskToEdit={this.props.taskToEdit}
-    //                 handleTaskSubmit={this.props.handleTaskSubmit} />
-    //         );
-    //     } else if (this.state.tasks) {
-    //         return (
-    //             this.state.tasks.map(task => {
-    //                     return (
-    //                         <div key={task.id}>
-    //                             Task:{task.title}<br />
-    //                             Description/Comments:{task.task}
-    //                             <button onClick={() => this.props.handleEdit(task)}>Edit Task</button>
-    //                             <button onClick={() => this.props.handleDelete(task.id)}>Delete Task</button>
-    //                         </div>
-    //                     );
-    //                 })
-    //         )
-    //     } else {
-    //         return null;
-    //     }
-    // }
+    renderTaskOrEditForm() {
+        if (this.props.taskToEdit) {
+            return (
+                <TaskForm isAdding={this.props.isAdding}
+                    taskToEdit={this.props.taskToEdit}
+                    handleTaskSubmit={this.props.handleTaskSubmit} />
+            );
+        } else if (this.state.tasks) {
+            return (
+                this.state.tasks.map(task => {
+                        return (
+                            <div key={task.id}>
+                                Task:{task.title}<br />
+                                Description/Comments:{task.task}
+                                <button onClick={() => this.props.handleEdit(task)}>Edit Task</button>
+                                <button onClick={() => this.props.handleDelete(task.id)}>Delete Task</button>
+                            </div>
+                        );
+                    })
+            )
+        } else {
+            return null;
+        }
+    }
 
     render() {
         return (
