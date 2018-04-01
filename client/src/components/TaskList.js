@@ -18,10 +18,12 @@ class TaskList extends Component {
 
     componentDidMount() {
         this.getTasks();
+        console.log('this is tasks:', this.state.tasks);
     }
 
     async getTasks() {
         let userId = this.state.userId;
+        console.log('this is usreid:', userId);
         if (userId) {
             try {
                 let tasks = await axios(`https://desolate-gorge-81835.herokuapp.com/api/tasks/${userId}`);
@@ -80,7 +82,7 @@ class TaskList extends Component {
         return (
             <div>
                 <h1>{this.state.userName}'s Tasks:</h1>
-                {this.renderTaskOrEditForm()}
+                {/* {this.renderTaskOrEditForm()} */}
                 {this.renderAddButtonOrForm()}
                 <Logout handleLogOutSubmit={this.props.handleLogOutSubmit} />
                 <Link to='/'>click here to return to home page</ Link>
