@@ -3,6 +3,7 @@ const db = require('../db/config');
 const Task = {};
 
 Task.findAll = userId => {
+    console.log('this is userId:', userId);
     return db.query(
         `SELECT * FROM tasks 
         WHERE user_id = $1 

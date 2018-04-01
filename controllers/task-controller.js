@@ -3,8 +3,13 @@ const Task = require('../models/task');
 const taskController = {};
 
 taskController.index = async (req, res) => {
-    const tasks = await Task.findAll(req.params.user);
-    res.send(tasks);
+    try {
+        const tasks = await Task.findAll(req.params.user);
+        res.send(tasks);
+        console.log('these are the tasks:', tasks);
+    } catch(err) {
+        console.log('this is task index error;', err);
+    } 
 }
 
 taskController.show = async (req, res) => {
