@@ -82,8 +82,8 @@ class TaskList extends Component {
         return (
             <div>
                 <h1>{this.state.userName}'s Tasks:</h1>
-                {/* {this.renderTaskOrEditForm()} */}
-                {/* {this.renderAddButtonOrForm()} */}
+                {this.renderTaskOrEditForm()}
+                {this.renderAddButtonOrForm()}
                 <Logout handleLogOutSubmit={this.props.handleLogOutSubmit} />
                 <Link to='/'>click here to return to home page</ Link>
             </div>
