@@ -33,14 +33,6 @@ const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-    //to let react-router handle routing in prod.
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
-    });
-}
-
 //enable cors.
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -55,6 +47,14 @@ app.use('/api/tasks', taskRoutes);
 
 const authRoutes = require('./routes/auth-routes.js');
 app.use('/auth', authRoutes);
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+    //to let react-router handle routing in prod.
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+    });
+}
 
 app.use('*', (req, res) => {
     res.status(404).send('Not Found');
