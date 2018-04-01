@@ -155,11 +155,11 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={props => <Home {...props}
                                           currentUserName={this.state.currentUserName}
-                                          currentUserId={this.state.currentUserId} /> }
+                                          currentUserId={this.state.currentUserId}
                                           isAdding={this.state.isAdding}
                                           taskToEdit={this.state.taskToEdit}
                                           handleTaskSubmit={this.handleTaskSubmit}
-                                          handleLogOutSubmit={this.handleLogOutSubmit} />
+                                          handleLogOutSubmit={this.handleLogOutSubmit} />} />
             <Route path='/register' component={props => <RegisterForm {...props}
                                           handleRegisterSubmit={this.handleRegisterSubmit} />} />
             <Route path="/login" component={props => <LogInForm {...props}
