@@ -24,7 +24,7 @@ class TaskList extends Component {
         let userId = this.state.userId;
         if (userId) {
             try {
-                let tasks = await axios(`/api/tasks/${userId}`);
+                let tasks = await axios(`https://desolate-gorge-81835.herokuapp.com/api/tasks/${userId}`);
                 console.log(tasks);
                 this.setState({ tasks: tasks.data });
             } catch (error) {
