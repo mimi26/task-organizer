@@ -26,7 +26,7 @@ class TaskList extends Component {
         console.log('this is usreid:', userId);
         if (userId) {
             try {
-                let tasks = await axios(`https://desolate-gorge-81835.herokuapp.com/api/tasks/${userId}`);
+                let tasks = await axios(`api/tasks/${userId}`);
                 console.log(tasks);
                 this.setState({ tasks: tasks.data });
             } catch (error) {
@@ -53,30 +53,30 @@ class TaskList extends Component {
         }
     }
 
-    renderTaskOrEditForm() {
-        if (this.props.taskToEdit) {
-            return (
-                <TaskForm isAdding={this.props.isAdding}
-                    taskToEdit={this.props.taskToEdit}
-                    handleTaskSubmit={this.props.handleTaskSubmit} />
-            );
-        } else if (this.state.tasks) {
-            return (
-                this.state.tasks.map(task => {
-                        return (
-                            <div key={task.id}>
-                                Task:{task.title}<br />
-                                Description/Comments:{task.task}
-                                <button onClick={() => this.props.handleEdit(task)}>Edit Task</button>
-                                <button onClick={() => this.props.handleDelete(task.id)}>Delete Task</button>
-                            </div>
-                        );
-                    })
-            )
-        } else {
-            return null;
-        }
-    }
+    // renderTaskOrEditForm() {
+    //     if (this.props.taskToEdit) {
+    //         return (
+    //             <TaskForm isAdding={this.props.isAdding}
+    //                 taskToEdit={this.props.taskToEdit}
+    //                 handleTaskSubmit={this.props.handleTaskSubmit} />
+    //         );
+    //     } else if (this.state.tasks) {
+    //         return (
+    //             this.state.tasks.map(task => {
+    //                     return (
+    //                         <div key={task.id}>
+    //                             Task:{task.title}<br />
+    //                             Description/Comments:{task.task}
+    //                             <button onClick={() => this.props.handleEdit(task)}>Edit Task</button>
+    //                             <button onClick={() => this.props.handleDelete(task.id)}>Delete Task</button>
+    //                         </div>
+    //                     );
+    //                 })
+    //         )
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
     render() {
         return (
