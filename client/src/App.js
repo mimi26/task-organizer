@@ -98,7 +98,7 @@ class App extends Component {
   async handleLogInSubmit(event, data) {
     event.preventDefault();
     try {
-      const login = await axios('auth/login', {
+      const login = await axios('https://do-all-the-things.herokuapp.com/auth/login', {
         method: 'POST',
         data: data
       });
