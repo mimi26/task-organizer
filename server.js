@@ -2,6 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const app = express();
 
+
 const path = require('path');
 
 const bodyParser = require('body-parser');
@@ -9,6 +10,9 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3001;
 
 app.use(logger('dev'));
+
+const cors = require('cors');
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
