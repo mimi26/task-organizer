@@ -4,6 +4,15 @@ const app = express();
 
 const path = require('path');
 
+//enable cors.
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    next();
+});
+
 const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 3001;
@@ -32,15 +41,6 @@ app.use(session({
 const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
-
-//enable cors.
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    next();
-});
 
 const taskRoutes = require('./routes/task-routes');
 app.use('/api/tasks', taskRoutes);
