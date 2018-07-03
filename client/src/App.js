@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles/App.css';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
@@ -42,7 +42,7 @@ class App extends Component {
     let userId = this.state.currentUserId;
     if(userId) { 
       try {
-        let tasks = await axios(`https://do-all-the-things.herokuapp.com/api/tasks/${userId}`);
+        let tasks = await axios(`/api/tasks/${userId}`);
         this.setState({ tasks: tasks.data });
       } catch (error) {
         console.log(error);
@@ -54,7 +54,7 @@ class App extends Component {
     event.preventDefault();
     const user_id = localStorage.getItem('id');
     try {
-      await fetch(`https://do-all-the-things.herokuapp.com/api/tasks/${id}`, {
+      await fetch(`/api/tasks/${id}`, {
       method: method,
       headers: {
         'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ class App extends Component {
   }
 
   async handleDelete(id) {
-    await fetch(`https://do-all-the-things.herokuapp.com/api/tasks/${id}`, {
+    await fetch(`/api/tasks/${id}`, {
       method: 'DELETE'
     });
     this.getTasks();
@@ -85,7 +85,7 @@ class App extends Component {
   async handleRegisterSubmit(event, data) {
     event.preventDefault();
     try {
-      await axios(`https://do-all-the-things.herokuapp.com/auth/register`, {
+      await axios(`/auth/register`, {
         method: 'POST',
         data: data
       });
@@ -98,7 +98,7 @@ class App extends Component {
   async handleLogInSubmit(event, data) {
     event.preventDefault();
     try {
-      const login = await axios('https://do-all-the-things.herokuapp.com/auth/login', {
+      const login = await axios('/auth/login', {
         method: 'POST',
         data: data
       });
@@ -118,7 +118,7 @@ class App extends Component {
   async handleLogOutSubmit(event) {
     event.preventDefault();
     try {
-      await axios.post('https://do-all-the-things.herokuapp.com/auth/logout');
+      await axios.post('/auth/logout');
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       localStorage.removeItem('id');

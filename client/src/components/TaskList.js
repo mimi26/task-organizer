@@ -24,7 +24,7 @@ class TaskList extends Component {
         let userId = parseInt(this.state.userId);
         if (userId) {
             try {
-                let tasks = await axios(`https://do-all-the-things.herokuapp.com/api/tasks/${userId}`);
+                let tasks = await axios(`/api/tasks/${userId}`);
                 this.setState({ tasks: tasks.data });
             } catch (error) {
                 console.log(error);
@@ -61,11 +61,20 @@ class TaskList extends Component {
             return (
                 this.state.tasks.map(task => {
                         return (
-                            <div key={task.id}>
-                                Task:{task.title}<br />
-                                Description/Comments:{task.task}
-                                <button onClick={() => this.props.handleEdit(task)}>Edit Task</button>
-                                <button onClick={() => this.props.handleDelete(task.id)}>Delete Task</button>
+                            <div key={task.id} className="task-container">
+                                <div className="task-cell task-status">
+                                    ON TIME
+                                </div>
+                                <div className="task-cell task-title">
+                                    {task.title}
+                                </div>
+                                <div className="task-cell task-description">
+                                    {task.task}
+                                </div>
+                                <div className="buttons">
+                                    <button onClick={() => this.props.handleEdit(task)}>Edit Task</button>
+                                    <button onClick={() => this.props.handleDelete(task.id)}>Delete Task</button>
+                                </div>
                             </div>
                         );
                     })
@@ -77,12 +86,20 @@ class TaskList extends Component {
 
     render() {
         return (
-            <div>
-                <h1>{this.state.userName}'s Tasks:</h1>
-                {this.renderTaskOrEditForm()}
-                {this.renderAddButtonOrForm()}
-                <Logout handleLogOutSubmit={this.props.handleLogOutSubmit} />
-                <Link to='/'>click here to return to home page</ Link>
+            <div className="list-container">
+                <div className="list-title">{this.state.userName}'S TO DO LIST</div>
+                <div className="list-body-container">
+                    <div className="task-headers">
+                        <div className="header">Status</div>
+                        <div className="header">Task</div>
+                        <div className="header">Description</div>
+                    </div>
+                        {this.renderTaskOrEditForm()}
+                        {this.renderAddButtonOrForm()}
+                    
+                    <Logout handleLogOutSubmit={this.props.handleLogOutSubmit} />
+                    <Link to='/'>click here to return to home page</ Link>
+                </div>
             </div>
         );
     }

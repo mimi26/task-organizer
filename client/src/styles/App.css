@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'HKGrotesk-Legacy';
+    src: url('./fonts/HKGrotesk-BoldLegacy.eot');
+    src:    url('./fonts/HKGrotesk-BoldLegacy.woff2') format('woff2'),
+            url('./fonts/HKGrotesk-BoldLegacy.woff') format('woff'),
+            url('./fonts/HKGrotesk-BoldLegacy.woff') format('opentype'),
+            url('./fonts/HKGrotesk-BoldLegacy.ttf') format('truetype'),
+            url('/fonts/HKGrotesk-BoldLegacy.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'PennStation';
+    src: url('./fonts/Pennstat.eot');
+    src:    url('./fonts/Pennstat.woff2') format('woff2'),
+            url('./fonts/PennStation.woff') format('woff'),
+            url('./fonts/Pennstat.ttf') format('truetype');
+}
+
+:root {
+  --dark-sky-blue: #4a90e2;
+  --sun-yellow: #f8e71c;
+  --scarlet: #d0021b;
+  --white: #ffffff;
+  --black: #000000;
+  --warm-grey: #9b9b9b;
+}
+.list-title {
+    width: 100%;
+    text-align: center;
+    font-family: 'HKGrotesk-Legacy';
+    font-size: 64px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 13.7px;
+    color: var(--white);
+    background: var(--dark-sky-blue);
+}
+
+.list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #000000;
+}
+
+.list-body-container {
+    width: 80%;
+    height: 100vh;
+    color: #ffffff;
+}
+
+.task-container {
+    /* display: flex;
+    justify-content: space-around; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    font-family: 'PennStation';
+    letter-spacing: 1.2px;
+    /* font-size: 20px; */
+    /* color: white; */
+}
+
+.task-headers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    /* justify-content: space-around; */
+}
+
+.header {
+    margin: 5px;
+    font-family: 'HKGrotesk-Legacy';
+    font-size: 48px;
+    letter-spacing: 1.4px;
+    display: flex;
+    justify-content: flex-start;
+    /* color: var(--white); */
+}
+
+.buttons {
+    display: none;
+}
+
+.task-cell {
+    display: flex;
+    justify-content: flex-start;
+}
