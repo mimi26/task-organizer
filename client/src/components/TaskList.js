@@ -11,9 +11,11 @@ class TaskList extends Component {
         this.state = {
             userId: localStorage.getItem('id') ? localStorage.getItem('id') : '',
             userName: localStorage.getItem('user') ? localStorage.getItem('user') : '',
-            tasks: []
+            tasks: [],
+            crossedOut: []
         }
         this.getTasks = this.getTasks.bind(this);
+        this.handleTaskClick = this.handleTaskClick.bind(this);
     }
 
     componentDidMount() {
@@ -25,7 +27,10 @@ class TaskList extends Component {
         if (userId) {
             try {
                 let tasks = await axios(`/api/tasks/${userId}`);
-                this.setState({ tasks: tasks.data });
+                this.setState({ 
+                    tasks: tasks.data,
+                    crossedOut: tasks.data.map(task => false)
+                });
             } catch (error) {
                 console.log(error);
             }
@@ -50,6 +55,12 @@ class TaskList extends Component {
         }
     }
 
+    handleTaskClick(index) {      
+        const newCrossedOut = [...this.state.crossedOut]
+        newCrossedOut[index] = !this.state.crossedOut[index]
+        this.setState({ crossedOut: newCrossedOut });
+    }
+
     renderTaskOrEditForm() {
         if (this.props.taskToEdit) {
             return (
@@ -59,17 +70,21 @@ class TaskList extends Component {
             );
         } else if (this.state.tasks) {
             return (
-                this.state.tasks.map(task => {
+                this.state.tasks.map((task, index) => {
+                    let className = this.state.crossedOut[index] ? 'task-text' : null
                         return (
-                            <div key={task.id} className="task-container">
+                            <div    key={task.id} 
+                                    className="task-container"
+                                    onClick={() => this.handleTaskClick(index)}
+>
                                 <div className="task-cell task-status">
-                                    ON TIME
+                                    <span className={className}>ON TIME</span>
                                 </div>
                                 <div className="task-cell task-title">
-                                    {task.title}
+                                    <span className={className}>{task.title}</span>
                                 </div>
                                 <div className="task-cell task-description">
-                                    {task.task}
+                                    <span className={className}>{task.task}</span>
                                 </div>
                                 <div className="buttons">
                                     <button onClick={() => this.props.handleEdit(task)}>Edit Task</button>
@@ -89,16 +104,26 @@ class TaskList extends Component {
             <div className="list-container">
                 <div className="list-title">{this.state.userName}'S TO DO LIST</div>
                 <div className="list-body-container">
-                    <div className="task-headers">
-                        <div className="header">Status</div>
-                        <div className="header">Task</div>
-                        <div className="header">Description</div>
-                    </div>
+                    <div>
+                        <div className="task-headers">
+                            <div className="header">Status</div>
+                            <div className="header">Task</div>
+                            <div className="header">Description</div>
+                        </div>
                         {this.renderTaskOrEditForm()}
                         {this.renderAddButtonOrForm()}
-                    
-                    <Logout handleLogOutSubmit={this.props.handleLogOutSubmit} />
-                    <Link to='/'>click here to return to home page</ Link>
+                    </div>
+                    <div className="bottom-container">
+                        <p
+                            className="show-crossed-off">
+                                HIDE CROSSED OFF
+                        </p>
+                        <p
+                            className="log-out" 
+                            onClick={this.props.handleLogOutSubmit}>
+                                LOG OUT
+                        </p>
+                    </div>
                 </div>
             </div>
         );

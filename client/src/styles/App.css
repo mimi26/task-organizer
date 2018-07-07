@@ -26,7 +26,6 @@
 }
 .list-title {
     width: 100%;
-    text-align: center;
     font-family: 'HKGrotesk-Legacy';
     font-size: 64px;
     font-weight: bold;
@@ -36,6 +35,10 @@
     letter-spacing: 13.7px;
     color: var(--white);
     background: var(--dark-sky-blue);
+    display: flex;
+    height: 104px;
+    justify-content: center;
+    align-items: center;
 }
 
 .list-container {
@@ -49,11 +52,16 @@
     width: 80%;
     height: 100vh;
     color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .task-container {
     /* display: flex;
     justify-content: space-around; */
+    margin: 3vh;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     font-family: 'PennStation';
@@ -86,4 +94,39 @@
 .task-cell {
     display: flex;
     justify-content: flex-start;
+    margin: 5px;
+    /* border-bottom: 1px solid white; */
 }
+
+.log-out {
+    color: var(--sun-yellow);
+    font-family: 'PennStation';
+}
+
+.show-crossed-off {
+    color: var(--scarlet);
+    font-family: 'PennStation';
+}
+
+.bottom-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task-text {
+    position: relative;
+    white-space: nowrap; /* would center line-through in the middle of the wrapped lines */
+}
+
+.task-text:after {
+    border-top: 1px solid white;
+    position: absolute;
+    content: "";
+    right: 0;
+    top:37%;
+    left: 0;
+}
+
+
+   

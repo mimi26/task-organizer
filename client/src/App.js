@@ -116,7 +116,7 @@ class App extends Component {
   }
 
   async handleLogOutSubmit(event) {
-    event.preventDefault();
+    // event.preventDefault();
     try {
       await axios.post('/auth/logout');
       localStorage.removeItem('token');
