@@ -16,6 +16,7 @@ class TaskList extends Component {
         }
         this.getTasks = this.getTasks.bind(this);
         this.handleTaskClick = this.handleTaskClick.bind(this);
+        this.renderStatus = this.renderStatus.bind(this);
     }
 
     componentDidMount() {
@@ -56,9 +57,17 @@ class TaskList extends Component {
     }
 
     handleTaskClick(index) {      
-        const newCrossedOut = [...this.state.crossedOut]
-        newCrossedOut[index] = !this.state.crossedOut[index]
+        const newCrossedOut = [...this.state.crossedOut];
+        newCrossedOut[index] = !this.state.crossedOut[index];
         this.setState({ crossedOut: newCrossedOut });
+    }
+
+    renderStatus(index) {
+        if (this.state.crossedOut[index]) {
+            return 'CROSSED OUT';
+        } else {
+            return 'ON TIME';
+        }
     }
 
     renderTaskOrEditForm() {
@@ -78,7 +87,7 @@ class TaskList extends Component {
                                     onClick={() => this.handleTaskClick(index)}
 >
                                 <div className="task-cell task-status">
-                                    <span className={className}>ON TIME</span>
+                                    <span className={className}>{this.renderStatus(index)}</span>
                                 </div>
                                 <div className="task-cell task-title">
                                     <span className={className}>{task.title}</span>
