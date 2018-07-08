@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import TaskForm from './TaskForm';
-import Logout from './Logout';
 
 class TaskList extends Component {
     constructor(props) {
@@ -12,11 +10,13 @@ class TaskList extends Component {
             userId: localStorage.getItem('id') ? localStorage.getItem('id') : '',
             userName: localStorage.getItem('user') ? localStorage.getItem('user') : '',
             tasks: [],
-            crossedOut: []
+            crossedOut: [],
+            hideCrossedOut: false
         }
         this.getTasks = this.getTasks.bind(this);
         this.handleTaskClick = this.handleTaskClick.bind(this);
         this.renderStatus = this.renderStatus.bind(this);
+        this.handleHideClick = this.handleHideClick.bind(this);
     }
 
     componentDidMount() {
@@ -70,6 +70,11 @@ class TaskList extends Component {
         }
     }
 
+    handleHideClick() {
+        const newhideCrossedOut = !this.state.hideCrossedOut;
+        this.setState({ hideCrossedOut: newhideCrossedOut });
+    }
+
     renderTaskOrEditForm() {
         if (this.props.taskToEdit) {
             return (
@@ -80,12 +85,14 @@ class TaskList extends Component {
         } else if (this.state.tasks) {
             return (
                 this.state.tasks.map((task, index) => {
-                    let className = this.state.crossedOut[index] ? 'task-text' : null
+                    let className = this.state.crossedOut[index] ? 'task-text' : null;
+                    let containerClass = this.state.hideCrossedOut && this.state.crossedOut[index] 
+                                        ? 'crossed-out-hide'
+                                        : 'task-container';
                         return (
                             <div    key={task.id} 
-                                    className="task-container"
-                                    onClick={() => this.handleTaskClick(index)}
->
+                                    className={containerClass}
+                                    onClick={() => this.handleTaskClick(index)}>
                                 <div className="task-cell task-status">
                                     <span className={className}>{this.renderStatus(index)}</span>
                                 </div>
@@ -101,7 +108,7 @@ class TaskList extends Component {
                                 </div>
                             </div>
                         );
-                    })
+                })
             )
         } else {
             return null;
@@ -124,7 +131,8 @@ class TaskList extends Component {
                     </div>
                     <div className="bottom-container">
                         <p
-                            className="show-crossed-off">
+                            className="show-crossed-off"
+                            onClick={this.handleHideClick}>
                                 HIDE CROSSED OFF
                         </p>
                         <p

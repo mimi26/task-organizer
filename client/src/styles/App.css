@@ -128,5 +128,9 @@
     left: 0;
 }
 
+.crossed-out-hide {
+    display: none;
+}
+
 
    
