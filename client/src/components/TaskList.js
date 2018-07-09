@@ -11,8 +11,10 @@ class TaskList extends Component {
             userName: localStorage.getItem('user') ? localStorage.getItem('user') : '',
             tasks: [],
             crossedOut: [],
-            hideCrossedOut: false
+            hideCrossedOut: false,
+            revealOrHide: 'HIDE'
         }
+
         this.getTasks = this.getTasks.bind(this);
         this.handleTaskClick = this.handleTaskClick.bind(this);
         this.renderStatus = this.renderStatus.bind(this);
@@ -38,23 +40,23 @@ class TaskList extends Component {
         }
     }
 
-    renderAddButtonOrForm() {
-        if (this.state.userName) {
-            if (this.props.isAdding) {
-                return (
-                    <TaskForm isAdding={this.props.isAdding}
-                        taskToEdit={this.props.taskToEdit}
-                        handleTaskSubmit={this.props.handleTaskSubmit} />
-                );
-            } else {
-                return (
-                    <button onClick={this.props.handleAddTask}>Add New Task</button>
-                );
-            }
-        } else {
-            return null;
-        }
-    }
+    // renderAddButtonOrForm() {
+    //     if (this.state.userName) {
+    //         if (this.props.isAdding) {
+    //             return (
+    //                 <TaskForm isAdding={this.props.isAdding}
+    //                     taskToEdit={this.props.taskToEdit}
+    //                     handleTaskSubmit={this.props.handleTaskSubmit} />
+    //             );
+    //         } else {
+    //             return (
+    //                 <button onClick={this.props.handleAddTask}>Add New Task</button>
+    //             );
+    //         }
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
     handleTaskClick(index) {      
         const newCrossedOut = [...this.state.crossedOut];
@@ -72,7 +74,16 @@ class TaskList extends Component {
 
     handleHideClick() {
         const newhideCrossedOut = !this.state.hideCrossedOut;
-        this.setState({ hideCrossedOut: newhideCrossedOut });
+        let newRevealOrHide;
+        if (this.state.revealOrHide === 'HIDE') {
+            newRevealOrHide = 'REVEAL'
+        } else if (this.state.revealOrHide === 'REVEAL') {
+            newRevealOrHide = 'HIDE';
+        }
+        this.setState({ 
+            hideCrossedOut: newhideCrossedOut,
+            revealOrHide: newRevealOrHide
+         });
     }
 
     renderTaskOrEditForm() {
@@ -120,26 +131,28 @@ class TaskList extends Component {
             <div className="list-container">
                 <div className="list-title">{this.state.userName}'S TO DO LIST</div>
                 <div className="list-body-container">
-                    <div>
+                    <div className="task-grid">
                         <div className="task-headers">
                             <div className="header">Status</div>
                             <div className="header">Task</div>
                             <div className="header">Description</div>
                         </div>
                         {this.renderTaskOrEditForm()}
-                        {this.renderAddButtonOrForm()}
+                        <TaskForm   isAdding={this.props.isAdding}
+                                    taskToEdit={this.props.taskToEdit}
+                                    handleTaskSubmit={this.props.handleTaskSubmit} />
                     </div>
                     <div className="bottom-container">
-                        <p
+                        <button
                             className="show-crossed-off"
                             onClick={this.handleHideClick}>
-                                HIDE CROSSED OFF
-                        </p>
-                        <p
+                                {this.state.revealOrHide} CROSSED OFF
+                        </button>
+                        <button
                             className="log-out" 
                             onClick={this.props.handleLogOutSubmit}>
                                 LOG OUT
-                        </p>
+                        </button>
                     </div>
                 </div>
             </div>

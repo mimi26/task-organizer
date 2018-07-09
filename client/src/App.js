@@ -13,7 +13,7 @@ class App extends Component {
     super();
     this.state = {
       tasks: [],
-      isAdding: false,
+      isAdding: true,
       taskToEdit: '',
       isLoggedIn: false,
       isRegistered: false,
@@ -66,7 +66,7 @@ class App extends Component {
       })
     });
       this.setState({ 
-        isAdding: false,
+        // isAdding: false,
         taskToEdit: ''
       });
     } catch (error) {

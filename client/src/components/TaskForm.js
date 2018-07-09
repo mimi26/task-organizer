@@ -24,23 +24,24 @@ class TaskForm extends Component {
 
     render() {
         return (
-            <div>
-               <form onSubmit={this.props.isAdding 
-                    ? e => this.props.handleTaskSubmit(e, 'POST', this.state)
-                    : e => this.props.handleTaskSubmit(e, 'PUT', this.state, this.props.taskToEdit.id)} >
-                   <label>Task:</label>
-                   <input   type="text" 
-                            onChange={this.handleInputChange} 
-                            value={this.state.title}
-                            name="title" />
-                   <label>Task Description:</label>
-                   <input   type="text" 
-                            onChange={this.handleInputChange} 
-                            value={this.state.task} 
-                            name="task" />
-                    <input type="submit" value="submit" />
-                </form>                
-            </div>
+            <form onSubmit={this.props.isAdding 
+                ? e => this.props.handleTaskSubmit(e, 'POST', this.state)
+                : e => this.props.handleTaskSubmit(e, 'PUT', this.state, this.props.taskToEdit.id)}
+                className="task-form">
+                <input   type="text" 
+                        onChange={this.handleInputChange} 
+                        value={this.state.title}
+                        name="title" 
+                        placeholder="ADD A NEW TASK"
+                        className="task-input"/>
+                <input   type="text" 
+                        onChange={this.handleInputChange} 
+                        value={this.state.task} 
+                        name="task" />
+                <input  type="submit" 
+                        value="submit"
+                        style={{display:"none"}}/>
+            </form>                
         );
     }
 }

@@ -98,20 +98,30 @@
     /* border-bottom: 1px solid white; */
 }
 
+.log-out, .show-crossed-off {
+    font-family: 'PennStation';
+    background: black;
+    border: black;
+    font-size: 18px;
+}
+
 .log-out {
     color: var(--sun-yellow);
-    font-family: 'PennStation';
 }
 
 .show-crossed-off {
     color: var(--scarlet);
-    font-family: 'PennStation';
+}
+
+.show-crossed-off:focus {
+    outline: none;
 }
 
 .bottom-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 14vh;
 }
 
 .task-text {
@@ -130,6 +140,22 @@
 
 .crossed-out-hide {
     display: none;
+}
+
+.task-form {
+    margin-left: 28vw;
+}
+
+.task-input {
+    font-family: 'PennStation';
+    color: white;
+    background: black;
+    border: black;
+    font-size: 16px;
+}
+
+.task-input:focus {
+    outline: none;
 }
 
 
