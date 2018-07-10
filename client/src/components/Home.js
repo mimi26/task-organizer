@@ -40,8 +40,8 @@ class Home extends Component {
         return (
             <div className="home-container">
                 <div className="ticket-container">
-                    <Link to='/login'><img src={register} /></Link>
-                    <Link to='/register'><img src={login} /></Link>
+                    <Link to='/register'><img src={register} /></Link>
+                    <Link to='/login'><img src={login} /></Link>
                 </div>
             </div>
         );
