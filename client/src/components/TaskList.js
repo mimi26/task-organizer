@@ -129,7 +129,7 @@ class TaskList extends Component {
     render() {
         return (
             <div className="list-container">
-                <div className="list-title">{this.state.userName}'S TO DO LIST</div>
+                <div className="list-title">{this.state.userName.toUpperCase()}'S TO DO LIST</div>
                 <div className="list-body-container">
                     <div className="task-grid">
                         <div className="task-headers">
