@@ -76,8 +76,8 @@ class TaskList extends Component {
         const newhideCrossedOut = !this.state.hideCrossedOut;
         let newRevealOrHide;
         if (this.state.revealOrHide === 'HIDE') {
-            newRevealOrHide = 'REVEAL'
-        } else if (this.state.revealOrHide === 'REVEAL') {
+            newRevealOrHide = 'SHOW'
+        } else if (this.state.revealOrHide === 'SHOW') {
             newRevealOrHide = 'HIDE';
         }
         this.setState({ 

@@ -1,6 +1,6 @@
 # Task Manager App
 
-This is an app for keeping track of things you need to do. Add pending tasks to the list and delete tasks when they are done. 
+This is an app for keeping track of things you need to do. Add pending tasks to the list and cross tasks off when they're done. 
 
 ## Contributors
 
