@@ -111,9 +111,10 @@
 
 .show-crossed-off {
     color: var(--scarlet);
+    margin-bottom: 8px;
 }
 
-.show-crossed-off:focus {
+.show-crossed-off:focus, .log-out:focus {
     outline: none;
 }
 
