@@ -144,10 +144,12 @@
 }
 
 .task-form {
-    margin-left: 28vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 3vh;
 }
 
-.task-input {
+.task-input-text, .task-input-description {
     font-family: 'PennStation';
     color: white;
     background: black;
@@ -155,8 +157,12 @@
     font-size: 16px;
 }
 
-.task-input:focus {
+.task-input-text:focus, .task-input-description:focus {
     outline: none;
+}
+
+.task-input-text {
+    grid-column-start: 2;
 }
 
 

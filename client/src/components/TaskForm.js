@@ -35,13 +35,13 @@ class TaskForm extends Component {
                         value={this.state.title}
                         name="title" 
                         placeholder="ADD A NEW TASK"
-                        className="task-input"/>
+                        className="task-input-text"/>
                 <input  type="text" 
                         onChange={this.handleInputChange} 
                         value={this.state.task} 
                         name="task" 
                         placeholder="ADD A NEW TASK DESCRIPTION"
-                        className="task-input"
+                        className="task-input-description"
                         style={{display:`${this.state.displayState}`}} />
                 <input  type="submit" 
                         value="submit"
