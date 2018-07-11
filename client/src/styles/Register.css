@@ -1,0 +1,30 @@
+.register-container {
+    background: black;
+    height: 100vh;
+    padding: 9vh 0 0 12vw;
+}
+
+.form-title {
+    color: white;
+    font-family: 'HKGrotesk-Legacy';
+    font-size: 45px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 14vh;
+    margin-bottom: 60px;
+}
+
+.back-link {
+    color: var(--sun-yellow);
+    font-family: 'PennStation';
+    text-decoration: none;
+}
+
+.submit-button {
+    text-align: start;
+    padding: 0;
+}

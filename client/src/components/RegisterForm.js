@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/Register.css';
 
 class RegisterForm extends Component {
     constructor() {
@@ -31,27 +32,30 @@ class RegisterForm extends Component {
     }
     render() {
         return (
-            <div>
-                <h1>Register:</h1>
-                <form onSubmit={(e) => this.submitForm(e)}>
-                    <label>Username:</label>
+            <div className="register-container">
+                <h1 className="form-title">Register</h1>
+                <form   onSubmit={(e) => this.submitForm(e)}
+                        className="register-form">
                     <input  type="text" 
                             value={this.state.username} 
                             name="username"
-                            onChange={this.handleChange} />
-                    <label>Email:</label>
+                            onChange={this.handleChange}
+                            placeholder="USERNAME" />
                     <input  type="email" 
                             value={this.state.email}
                             name="email" 
-                            onChange={this.handleChange} />
-                    <label>Password:</label>
+                            onChange={this.handleChange}
+                            placeholder="EMAIL" />
                     <input  type="password" 
                             value={this.state.password_digest} 
                             name="password_digest"
-                            onChange={this.handleChange} />
-                    <input type="submit" value="Submit"/>
+                            onChange={this.handleChange}
+                            placeholder="PASSWORD" />
+                    <input  type="submit" 
+                            value="Submit"
+                            className="submit-button" />
                 </form>
-                <Link to='/'>Return to Home page</ Link>
+                <Link className="back-link" to='/'>BACK</ Link>
             </div>
         );
     }
