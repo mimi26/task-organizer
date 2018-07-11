@@ -18,6 +18,10 @@
     margin-bottom: 60px;
 }
 
+.login-form {
+    height: 9vh;
+}
+
 .back-link {
     color: var(--sun-yellow);
     font-family: 'PennStation';

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/Register.css';
+
 
 class LogInForm extends Component {
     constructor() {
@@ -30,22 +32,27 @@ class LogInForm extends Component {
     }
     render() {
         return (
-            <div>
-                <h1>Log In:</h1>
-                <form onSubmit={(e) => this.submitForm(e)}>
-                    <label>Username:</label>
+            <div className="register-container">
+                <h1 className="form-title">Log In:</h1>
+                <form   onSubmit={(e) => this.submitForm(e)}
+                        className="register-form login-form">
+                    {/* <label>Username:</label> */}
                     <input type="text"
                         value={this.state.username}
                         name="username"
-                        onChange={this.handleChange} />
-                    <label>Password:</label>
+                        onChange={this.handleChange} 
+                        placeholder="USERNAME" />
+                    {/* <label>Password:</label> */}
                     <input type="password"
                         value={this.state.password}
                         name="password"
-                        onChange={this.handleChange} />
-                    <input type="submit" value="Submit" />
+                        onChange={this.handleChange}
+                        placeholder="PASSWORD" />
+                    <input  type="submit" 
+                            value="Submit" 
+                            className="submit-button" />
                 </form>
-                <Link to='/'>Return to Home page</ Link>
+                <Link className="back-link" to='/'>BACK</ Link>
             </div>
         );
     }

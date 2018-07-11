@@ -24,6 +24,7 @@ class RegisterForm extends Component {
     }
 
     handleChange(e) {
+        
         const name = e.target.name;
         const val = e.target.value;
         this.setState({
@@ -43,6 +44,7 @@ class RegisterForm extends Component {
                             placeholder="USERNAME" />
                     <input  type="email" 
                             value={this.state.email}
+                            // value="hello<span className='at'>@</span>hello"
                             name="email" 
                             onChange={this.handleChange}
                             placeholder="EMAIL" />
