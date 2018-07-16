@@ -17,6 +17,7 @@ class App extends Component {
       taskToEdit: '',
       isLoggedIn: false,
       isRegistered: false,
+      messageAlert: '',
       currentUserId: localStorage.getItem('id') ? localStorage.getItem('id') : '',
       currentUserName: localStorage.getItem('user') ? localStorage.getItem('user') : ''
     };
@@ -102,21 +103,25 @@ class App extends Component {
         method: 'POST',
         data: data
       });
-      localStorage.setItem("token", login.data.token);
-      localStorage.setItem("user", login.data.userData.username);
-      localStorage.setItem("id", login.data.userData.id);
-      this.setState({ 
-        currentUserId: login.data.userData.id,
-        isLoggedIn: true
-       });
-      //  this.getTasks();
+      if (login.data.user) {
+        localStorage.setItem("token", login.data.token);
+        localStorage.setItem("user", login.data.user.username);
+        localStorage.setItem("id", login.data.user.id);
+        this.setState({ 
+          currentUserId: login.data.user.id,
+          isLoggedIn: true,
+          messageAlert: ''
+        });
+      } else {
+        console.log("this is data:", login.data);
+        this.setState({ messageAlert: login.data });
+      }
     } catch(error) {
-      console.log(error);
+      console.log("this is error:", error);
     }
   }
 
   async handleLogOutSubmit(event) {
-    // event.preventDefault();
     try {
       await axios.post('/auth/logout');
       localStorage.removeItem('token');

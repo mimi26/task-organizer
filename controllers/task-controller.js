@@ -6,7 +6,6 @@ taskController.index = async (req, res) => {
     try {
         const tasks = await Task.findAll(req.params.user);
         res.send(tasks);
-        console.log('these are the tasks:', tasks);
     } catch(err) {
         console.log('this is task index error;', err);
     } 

@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user.js');
 
 const usersController = {};
@@ -6,7 +7,6 @@ const usersController = {};
 usersController.create = (req, res) => {
     const salt = bcrypt.genSaltSync();
     const hash = bcrypt.hashSync(req.body.password_digest, salt);
-    console.log("this is req.body:", req.body)
     User.createUser({
         username: req.body.username,
         email: req.body.email,
@@ -20,6 +20,29 @@ usersController.create = (req, res) => {
         console.log(err);
         res.status(500).json({ error });
     });
+}
+
+usersController.login = (req, res) => {
+    User.findByUserName(req.body.username).then(user => {
+        console.log("this is user inside login:", user);
+        if (!user) {
+            res.send('please enter valid username');
+        } else {
+            bcrypt.compare(req.body.password, user.password_digest, (err, response) => {
+                console.log("this is err inside login:", err);
+                console.log("this is res inside login:", response);
+                if(response) {
+                    const token = jwt.sign({ id: user.id, username: user.username }, process.env.SESSION_KEY, {
+                        expiresIn: 604800 // 1 WEEK
+                    });
+                    res.send({ token, user });
+                } else {
+                    res.send('boo, password wrong');
+                }
+            });
+        }
+        
+    });    
 }
 
 

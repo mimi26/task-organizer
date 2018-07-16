@@ -16,12 +16,12 @@ passport.use(
         .then(user => {
             console.log('this is user inside local:', user);
             if(!user) {
-                return done(null, false);
-                console.log('inside of !user');    
+                console.log('inside of !user'); 
+                return done(null, false, { message: 'wrong username' });   
             }
             if(!authHelpers.comparePass(password, user.password_digest)) {
-                console.log('wrong password!')
-                return done(null, false);
+                console.log('wrong password!');
+                return done(null, false, { message: 'bad password' });
             } else {
                 const token = jwt.sign({ id: user.id, username: user.username }, process.env.SESSION_KEY, {
                     expiresIn: 604800 // 1 WEEK

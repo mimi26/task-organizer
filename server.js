@@ -1,6 +1,10 @@
 const express = require('express');
 const logger = require('morgan');
+
+const flash = require('connect-flash');
 const app = express();
+
+app.use(flash());
 
 
 const path = require('path');
