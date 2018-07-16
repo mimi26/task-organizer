@@ -24,24 +24,21 @@ usersController.create = (req, res) => {
 
 usersController.login = (req, res) => {
     User.findByUserName(req.body.username).then(user => {
-        console.log("this is user inside login:", user);
         if (!user) {
             res.send('please enter valid username');
         } else {
             bcrypt.compare(req.body.password, user.password_digest, (err, response) => {
                 console.log("this is err inside login:", err);
-                console.log("this is res inside login:", response);
                 if(response) {
                     const token = jwt.sign({ id: user.id, username: user.username }, process.env.SESSION_KEY, {
                         expiresIn: 604800 // 1 WEEK
                     });
                     res.send({ token, user });
                 } else {
-                    res.send('boo, password wrong');
+                    res.send('Incorrect username/password combination');
                 }
             });
         }
-        
     });    
 }
 

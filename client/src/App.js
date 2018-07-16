@@ -168,7 +168,8 @@ class App extends Component {
             <Route path='/register' component={props => <RegisterForm {...props}
                                           handleRegisterSubmit={this.handleRegisterSubmit} />} />
             <Route path="/login" component={props => <LogInForm {...props}
-                                          handleLogInSubmit={this.handleLogInSubmit} />} />
+                                          handleLogInSubmit={this.handleLogInSubmit}
+                                          messageAlert={this.state.messageAlert} />} />
             <Route path='/tasks/:user' component={(props) => <TaskList {...props} 
                                           tasks={this.state.tasks}
                                           handleDelete={this.handleDelete}

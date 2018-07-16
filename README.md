@@ -16,7 +16,6 @@ https://do-all-the-things.herokuapp.com/
 - PostgreSQL
 - React
 - React-Router
-- Passport
 - Bcrypt
 - Jason Web Token
 - Concurrently

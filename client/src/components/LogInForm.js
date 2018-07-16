@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Register.css';
+import MessageAlert from "./MessageAlert";
 
 
 class LogInForm extends Component {
@@ -52,6 +53,7 @@ class LogInForm extends Component {
                             value="Submit" 
                             className="submit-button" />
                 </form>
+                <MessageAlert messageAlert={this.props.messageAlert} />
                 <Link className="back-link" to='/'>BACK</ Link>
             </div>
         );
