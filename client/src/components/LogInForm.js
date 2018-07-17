@@ -31,6 +31,7 @@ class LogInForm extends Component {
             [name]: val,
         });
     }
+    
     render() {
         return (
             <div className="register-container">
