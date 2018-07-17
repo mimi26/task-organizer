@@ -90,9 +90,15 @@ class App extends Component {
         method: 'POST',
         data: data
       });
-      this.setState({ isRegistered: true });
+      this.setState({ 
+        isRegistered: true,
+        messageAlert: ''
+       });
     } catch(error) {
-      console.log(error)
+      console.log(error.response);
+      this.setState({
+        messageAlert: error.response.data
+      });
     }
   }
 
@@ -166,7 +172,8 @@ class App extends Component {
                                           handleTaskSubmit={this.handleTaskSubmit}
                                           handleLogOutSubmit={this.handleLogOutSubmit} />} />
             <Route path='/register' component={props => <RegisterForm {...props}
-                                          handleRegisterSubmit={this.handleRegisterSubmit} />} />
+                                          handleRegisterSubmit={this.handleRegisterSubmit}
+                                          messageAlert={this.state.messageAlert} />} />
             <Route path="/login" component={props => <LogInForm {...props}
                                           handleLogInSubmit={this.handleLogInSubmit}
                                           messageAlert={this.state.messageAlert} />} />

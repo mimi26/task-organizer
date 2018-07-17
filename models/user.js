@@ -12,6 +12,16 @@ User.findByUserName = userName => {
     );
 };
 
+User.findByEmail = email => {
+    return db.oneOrNone(
+        `
+        SELECT * FROM users
+        WHERE email = $1
+        `,
+        [email]
+    );
+};
+
 User.createUser = user => {
     return db.one(
         `

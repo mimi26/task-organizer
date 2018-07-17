@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Register.css';
+import MessageAlert from "./MessageAlert";
 
 class RegisterForm extends Component {
     constructor() {
@@ -58,6 +59,7 @@ class RegisterForm extends Component {
                             className="submit-button" />
                 </form>
                 <Link className="back-link" to='/'>BACK</ Link>
+                <MessageAlert messageAlert={this.props.messageAlert} />
             </div>
         );
     }
