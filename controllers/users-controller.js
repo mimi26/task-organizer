@@ -18,7 +18,7 @@ usersController.create = (req, res) => {
                     }).then(user => {
                         res.send(user);
                     }).catch(error => {
-                        res.send(error);
+                        res.status(500).send(error);
                     });
                 } else {
                     res.status(409).send('This email is already registered.');

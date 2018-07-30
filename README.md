@@ -17,7 +17,7 @@ https://do-all-the-things.herokuapp.com/
 - React
 - React-Router
 - Bcrypt
-- Jason Web Token
+- JSON Web Token
 - Concurrently
 - Axios
 

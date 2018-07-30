@@ -7,9 +7,9 @@ class RegisterForm extends Component {
     constructor() {
         super();
         this.state = {
-            username: '',
-            email: '',
-            password_digest: ''
+            username: null,
+            email: null,
+            password_digest: null
         }
         this.handleChange = this.handleChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
@@ -18,9 +18,9 @@ class RegisterForm extends Component {
     submitForm(e) {
         this.props.handleRegisterSubmit(e, this.state);
         this.setState({
-            username: '',
-            email: '',
-            password_digest: ''
+            username: null,
+            email: null,
+            password_digest: null
         });
     }
 
