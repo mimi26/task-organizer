@@ -25,13 +25,13 @@ class RegisterForm extends Component {
     }
 
     handleChange(e) {
-        
         const name = e.target.name;
         const val = e.target.value;
         this.setState({
-            [name]: val,
+            [name]: val
         });
     }
+     
     render() {
         return (
             <div className="register-container">

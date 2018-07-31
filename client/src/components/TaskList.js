@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import TaskForm from './TaskForm';
+import Task from './Task';
 
 class TaskList extends Component {
     constructor(props) {
@@ -17,7 +18,6 @@ class TaskList extends Component {
 
         this.getTasks = this.getTasks.bind(this);
         this.handleTaskClick = this.handleTaskClick.bind(this);
-        this.renderStatus = this.renderStatus.bind(this);
         this.handleHideClick = this.handleHideClick.bind(this);
     }
 
@@ -64,14 +64,6 @@ class TaskList extends Component {
         this.setState({ crossedOut: newCrossedOut });
     }
 
-    renderStatus(index) {
-        if (this.state.crossedOut[index]) {
-            return 'CROSSED OUT';
-        } else {
-            return 'ON TIME';
-        }
-    }
-
     handleHideClick() {
         const newhideCrossedOut = !this.state.hideCrossedOut;
         let newRevealOrHide;
@@ -86,6 +78,7 @@ class TaskList extends Component {
          });
     }
 
+
     renderTaskOrEditForm() {
         if (this.props.taskToEdit) {
             return (
@@ -96,30 +89,13 @@ class TaskList extends Component {
         } else if (this.state.tasks) {
             return (
                 this.state.tasks.map((task, index) => {
-                    let className = this.state.crossedOut[index] ? 'task-text' : null;
-                    let containerClass = this.state.hideCrossedOut && this.state.crossedOut[index] 
-                                        ? 'crossed-out-hide'
-                                        : 'task-container';
-                        return (
-                            <div    key={task.id} 
-                                    className={containerClass}
-                                    onClick={() => this.handleTaskClick(index)}>
-                                <div className="task-cell task-status">
-                                    <span className={className}>{this.renderStatus(index)}</span>
-                                </div>
-                                <div className="task-cell task-title">
-                                    <span className={className}>{task.title}</span>
-                                </div>
-                                <div className="task-cell task-description">
-                                    <span className={className}>{task.task}</span>
-                                </div>
-                                <div className="buttons">
-                                    <button onClick={() => this.props.handleEdit(task)}>Edit Task</button>
-                                    <button onClick={() => this.props.handleDelete(task.id)}>Delete Task</button>
-                                </div>
-                            </div>
-                        );
-                })
+                    return (
+                    <Task   key={task.id}
+                            index={index}
+                            task={task}
+                            handleTaskClick={this.handleTaskClick}
+                            crossedOut={this.state.crossedOut}/>
+                )})
             )
         } else {
             return null;

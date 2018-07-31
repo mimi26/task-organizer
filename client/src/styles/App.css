@@ -83,7 +83,17 @@
     justify-content: flex-start;
 }
 
-.buttons {
+.edit {
+    display: none;
+}
+
+.delete {
+    color: red;
+    background: black;
+    border: black;
+}
+
+.hide-delete {
     display: none;
 }
 
