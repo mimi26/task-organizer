@@ -94,7 +94,8 @@ class TaskList extends Component {
                             index={index}
                             task={task}
                             handleTaskClick={this.handleTaskClick}
-                            crossedOut={this.state.crossedOut}/>
+                            crossedOut={this.state.crossedOut}
+                            handleDelete={this.props.handleDelete}/>
                 )})
             )
         } else {

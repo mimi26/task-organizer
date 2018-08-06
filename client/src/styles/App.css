@@ -91,10 +91,12 @@
     color: red;
     background: black;
     border: black;
+    font-size: 15px;
+    margin-top: -3px;
 }
 
 .hide-delete {
-    display: none;
+    visibility: hidden;
 }
 
 .task-cell {
