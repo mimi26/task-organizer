@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 
 class Task extends Component {
-    constructor() {
-        super();
-        this.state = { taskHovered: false };
+    constructor(props) {
+        super(props);
+        this.state = {
+          taskHovered: false,
+          isCrossedOff: this.props.task.crossed_off
+         };
+
         this.renderStatus = this.renderStatus.bind(this);
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
+        this.handleTaskClick = this.handleTaskClick.bind(this);
     }
 
     renderStatus(index) {
@@ -25,22 +30,45 @@ class Task extends Component {
         this.setState({ taskHovered: false });
     }
 
+    async handleTaskClick(taskId) {
+        const opts = {
+          method: 'PUT',
+          body: JSON.stringify({
+            crossed_off: !this.props.task.crossed_off,
+            user_id: localStorage.getItem('id'),
+            title: this.props.task.title,
+            task: this.props.task.task
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+
+        try {
+          const task = await fetch(`/api/tasks/${taskId}`, opts);
+          this.setState({ isCrossedOff: task.crossed_off });
+        } catch (error) {
+          throw Error(error);
+        }
+        this.props.getTasks();
+    }
+
     render() {
-        let { task, handleTaskClick, index, crossedOut } = this.props;
-        let className = crossedOut[index] ? 'task-text' : null;
+        let { task, index, crossedOut } = this.props;
+        let className = this.props.task.crossed_off ? 'task-text' : null;
         let containerClass = this.state.hideCrossedOut && this.state.crossedOut[index]
             ? 'crossed-out-hide'
             : 'task-container';
         let deleteClass = this.state.taskHovered ? ['delete'] : 'delete hide-delete';
         return (
-            <div 
+            <div
                 className={containerClass}
-                onClick={() => handleTaskClick(index)}
+                onClick={() => this.handleTaskClick(task.id)}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}>
                 {/* <div className="buttons">
                                 <button className="edit" onClick={() => this.props.handleEdit(task)}>Edit Task</button>
-                                
+
                             </div> */}
                 <div className="task-cell task-status">
                     <button className={deleteClass}

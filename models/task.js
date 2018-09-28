@@ -4,8 +4,8 @@ const Task = {};
 
 Task.findAll = userId => {
     return db.query(
-        `SELECT * FROM tasks 
-        WHERE user_id = $1 
+        `SELECT * FROM tasks
+        WHERE user_id = $1
         ORDER BY id ASC`,
         [userId]
     );
@@ -47,12 +47,12 @@ Task.update = (task, id) => {
         UPDATE tasks SET
         title = $1,
         task = $2,
-        user_id = $3
-        WHERE id = $4
+        user_id = $3,
+        crossed_off = $4
+        WHERE id = $5
         `,
-        [task.title, task.task, task.user_id, id]
+        [task.title, task.task, task.user_id, task.crossed_off, id]
     );
 };
 
 module.exports = Task;
-

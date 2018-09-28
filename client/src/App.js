@@ -34,14 +34,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.getUser();
     this.isUserAuthenticated();
-    // this.getTasks();
   }
 
   async getTasks() {
     let userId = this.state.currentUserId;
-    if(userId) { 
+    if(userId) {
       try {
         let tasks = await axios(`/api/tasks/${userId}`);
         this.setState({ tasks: tasks.data });
@@ -50,7 +48,7 @@ class App extends Component {
       }
     }
   }
-  
+
   async handleTaskSubmit(event, method, data, id = '') {
     event.preventDefault();
     const user_id = localStorage.getItem('id');
@@ -66,7 +64,7 @@ class App extends Component {
         user_id
       })
     });
-      this.setState({ 
+      this.setState({
         // isAdding: false,
         taskToEdit: ''
       });
@@ -90,7 +88,7 @@ class App extends Component {
         method: 'POST',
         data: data
       });
-      this.setState({ 
+      this.setState({
         isRegistered: true,
         messageAlert: ''
        });
@@ -113,7 +111,7 @@ class App extends Component {
         localStorage.setItem("token", login.data.token);
         localStorage.setItem("user", login.data.user.username);
         localStorage.setItem("id", login.data.user.id);
-        this.setState({ 
+        this.setState({
           currentUserId: login.data.user.id,
           isLoggedIn: true,
           messageAlert: ''
@@ -133,7 +131,7 @@ class App extends Component {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       localStorage.removeItem('id');
-      this.setState({ 
+      this.setState({
         isLoggedIn: false,
         currentUserId: '',
         currentUserName: '',
@@ -177,21 +175,21 @@ class App extends Component {
             <Route path="/login" component={props => <LogInForm {...props}
                                           handleLogInSubmit={this.handleLogInSubmit}
                                           messageAlert={this.state.messageAlert} />} />
-            <Route path='/tasks/:user' component={(props) => <TaskList {...props} 
+            <Route path='/tasks/:user' component={(props) => <TaskList {...props}
                                           tasks={this.state.tasks}
                                           handleDelete={this.handleDelete}
                                           handleEdit={this.handleEdit}
                                           taskToEdit={this.state.taskToEdit}
-                                          isAdding={this.state.isAdding} 
+                                          isAdding={this.state.isAdding}
                                           handleTaskSubmit={this.handleTaskSubmit}
                                           getTasks={this.getTasks}
                                           currentUserName={this.state.currentUserName}
                                           handleAddTask={this.handleAddTask}
                                           handleLogOutSubmit={this.handleLogOutSubmit} />} />
-            
+
           </Switch>
-          {(this.state.isLoggedIn) 
-              ? <Redirect to={`/tasks/${this.state.currentUserId}`} /> 
+          {(this.state.isLoggedIn)
+              ? <Redirect to={`/tasks/${this.state.currentUserId}`} />
               : <Redirect to='/' />}
           {this.state.isRegistered && <Redirect to='/login' />}
         </div>

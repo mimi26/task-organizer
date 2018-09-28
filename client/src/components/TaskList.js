@@ -17,7 +17,6 @@ class TaskList extends Component {
         }
 
         this.getTasks = this.getTasks.bind(this);
-        this.handleTaskClick = this.handleTaskClick.bind(this);
         this.handleHideClick = this.handleHideClick.bind(this);
     }
 
@@ -30,7 +29,7 @@ class TaskList extends Component {
         if (userId) {
             try {
                 let tasks = await axios(`/api/tasks/${userId}`);
-                this.setState({ 
+                this.setState({
                     tasks: tasks.data,
                     crossedOut: tasks.data.map(task => false)
                 });
@@ -58,11 +57,19 @@ class TaskList extends Component {
     //     }
     // }
 
-    handleTaskClick(index) {      
-        const newCrossedOut = [...this.state.crossedOut];
-        newCrossedOut[index] = !this.state.crossedOut[index];
-        this.setState({ crossedOut: newCrossedOut });
-    }
+
+    // async getTasks() {
+    //   let userId = this.state.currentUserId;
+    //   if(userId) {
+    //     try {
+    //       let tasks = await axios(`/api/tasks/${userId}`);
+    //       this.setState({ tasks: tasks.data });
+    //     } catch (error) {
+    //       console.log(error);
+    //     }
+    //   }
+    // }
+
 
     handleHideClick() {
         const newhideCrossedOut = !this.state.hideCrossedOut;
@@ -72,7 +79,7 @@ class TaskList extends Component {
         } else if (this.state.revealOrHide === 'SHOW') {
             newRevealOrHide = 'HIDE';
         }
-        this.setState({ 
+        this.setState({
             hideCrossedOut: newhideCrossedOut,
             revealOrHide: newRevealOrHide
          });
@@ -95,7 +102,8 @@ class TaskList extends Component {
                             task={task}
                             handleTaskClick={this.handleTaskClick}
                             crossedOut={this.state.crossedOut}
-                            handleDelete={this.props.handleDelete}/>
+                            handleDelete={this.props.handleDelete}
+                            getTasks={this.getTasks} />
                 )})
             )
         } else {
@@ -126,7 +134,7 @@ class TaskList extends Component {
                                 {this.state.revealOrHide} CROSSED OFF
                         </button>
                         <button
-                            className="log-out" 
+                            className="log-out"
                             onClick={this.props.handleLogOutSubmit}>
                                 LOG OUT
                         </button>
