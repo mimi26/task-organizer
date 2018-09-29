@@ -14,8 +14,8 @@ class Task extends Component {
         this.handleTaskClick = this.handleTaskClick.bind(this);
     }
 
-    renderStatus(index) {
-        if (this.props.crossedOut[index]) {
+    renderStatus(isCrossedOff) {
+        if (isCrossedOff) {
             return 'CROSSED OUT';
         } else {
             return 'ON TIME';
@@ -54,9 +54,9 @@ class Task extends Component {
     }
 
     render() {
-        let { task, index, crossedOut } = this.props;
+        let { task, index, hideCrossedOut } = this.props;
         let className = this.props.task.crossed_off ? 'task-text' : null;
-        let containerClass = this.state.hideCrossedOut && this.state.crossedOut[index]
+        let containerClass = hideCrossedOut && this.state.isCrossedOff
             ? 'crossed-out-hide'
             : 'task-container';
         let deleteClass = this.state.taskHovered ? ['delete'] : 'delete hide-delete';
@@ -73,7 +73,7 @@ class Task extends Component {
                 <div className="task-cell task-status">
                     <button className={deleteClass}
                         onClick={() => this.props.handleDelete(task.id)}>X</button>
-                    <span className={className}>{this.renderStatus(index)}</span>
+                    <span className={className}>{this.renderStatus(this.state.isCrossedOff)}</span>
                 </div>
                 <div className="task-cell task-title">
                     <span className={className}>{task.title}</span>

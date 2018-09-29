@@ -11,7 +11,6 @@ class TaskList extends Component {
             userId: localStorage.getItem('id') ? localStorage.getItem('id') : '',
             userName: localStorage.getItem('user') ? localStorage.getItem('user') : '',
             tasks: [],
-            crossedOut: [],
             hideCrossedOut: false,
             revealOrHide: 'HIDE'
         }
@@ -30,8 +29,7 @@ class TaskList extends Component {
             try {
                 let tasks = await axios(`/api/tasks/${userId}`);
                 this.setState({
-                    tasks: tasks.data,
-                    crossedOut: tasks.data.map(task => false)
+                    tasks: tasks.data
                 });
             } catch (error) {
                 console.log(error);
@@ -57,20 +55,6 @@ class TaskList extends Component {
     //     }
     // }
 
-
-    // async getTasks() {
-    //   let userId = this.state.currentUserId;
-    //   if(userId) {
-    //     try {
-    //       let tasks = await axios(`/api/tasks/${userId}`);
-    //       this.setState({ tasks: tasks.data });
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   }
-    // }
-
-
     handleHideClick() {
         const newhideCrossedOut = !this.state.hideCrossedOut;
         let newRevealOrHide;
@@ -84,7 +68,6 @@ class TaskList extends Component {
             revealOrHide: newRevealOrHide
          });
     }
-
 
     renderTaskOrEditForm() {
         if (this.props.taskToEdit) {
@@ -101,11 +84,11 @@ class TaskList extends Component {
                             index={index}
                             task={task}
                             handleTaskClick={this.handleTaskClick}
-                            crossedOut={this.state.crossedOut}
                             handleDelete={this.props.handleDelete}
-                            getTasks={this.getTasks} />
+                            getTasks={this.getTasks}
+                            hideCrossedOut={this.state.hideCrossedOut} />
                 )})
-            )
+            );
         } else {
             return null;
         }
