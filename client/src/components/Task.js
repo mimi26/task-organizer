@@ -5,7 +5,7 @@ class Task extends Component {
         super(props);
         this.state = {
           taskHovered: false,
-          isCrossedOff: this.props.task.crossed_off
+          isCrossedOff: props.task.crossed_off
          };
 
         this.renderStatus = this.renderStatus.bind(this);
@@ -46,7 +46,9 @@ class Task extends Component {
 
         try {
           const task = await fetch(`/api/tasks/${taskId}`, opts);
-          this.setState({ isCrossedOff: task.crossed_off });
+          const resp = await fetch(`/api/tasks/show/${taskId}`);
+          const editedTask = await resp.json();
+          this.setState({ isCrossedOff: editedTask.crossed_off });
         } catch (error) {
           throw Error(error);
         }
