@@ -64,7 +64,8 @@
     margin: 3vh;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    font-family: 'PennStation';
+    /* font-family: 'PennStation'; */
+    font-family: 'Orbitron', sans-serif;
     letter-spacing: 1.2px;
 }
 
@@ -106,7 +107,8 @@
 }
 
 .log-out, .show-crossed-off {
-    font-family: 'PennStation';
+    /* font-family: 'PennStation'; */
+    font-family: 'Orbitron', sans-serif;
     background: black;
     border: black;
     font-size: 18px;
@@ -157,7 +159,8 @@
 }
 
 input {
-    font-family: 'PennStation', serif;
+    /* font-family: 'PennStation', serif; */
+    font-family: 'Orbitron', sans-serif;
     color: white;
     background: black;
     border: black;
