@@ -37,24 +37,6 @@ class TaskList extends Component {
         }
     }
 
-    // renderAddButtonOrForm() {
-    //     if (this.state.userName) {
-    //         if (this.props.isAdding) {
-    //             return (
-    //                 <TaskForm isAdding={this.props.isAdding}
-    //                     taskToEdit={this.props.taskToEdit}
-    //                     handleTaskSubmit={this.props.handleTaskSubmit} />
-    //             );
-    //         } else {
-    //             return (
-    //                 <button onClick={this.props.handleAddTask}>Add New Task</button>
-    //             );
-    //         }
-    //     } else {
-    //         return null;
-    //     }
-    // }
-
     handleHideClick() {
         const newhideCrossedOut = !this.state.hideCrossedOut;
         let newRevealOrHide;

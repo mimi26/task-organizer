@@ -13,28 +13,6 @@ class Home extends Component {
         }
     }
 
-    // renderLogInOrWelcome() {
-    //     if(this.state.userName) {
-    //         return(
-    //             <div>
-    //                 <h1>Welcome Back {this.state.userName}!</h1>
-    //                 <Link to={`/tasks/${this.state.userId}`}>Manage your tasks</Link>
-    //                 <Logout handleLogOutSubmit={this.props.handleLogOutSubmit} />
-    //             </div>
-    //         );
-    //     } else {
-    //         return (
-    //             <div>
-    //                 <h1>To manage your tasks, please
-    //                     <Link to='/login'> log in:</Link>
-    //                 </h1>
-    //                 <h1>Or to get started, please
-    //                     <Link to='/register'> register:</Link>
-    //                 </h1>
-    //             </div>
-    //         );
-    //     }
-    // }
 
     render() {
         return (
