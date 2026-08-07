@@ -17,6 +17,7 @@ function setDatabase() {
             host: 'localhost'
         });
     } else if (process.env.NODE_ENV === 'production') {
+        console.log('***** ~ setDatabase ~ process.env.DATABASE_URL:', process.env.DATABASE_URL);
         return pgp(process.env.DATABASE_URL);
     }
 }
