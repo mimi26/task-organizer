@@ -40,7 +40,10 @@ app.use(passport.session());
 
 //enable cors.
 const cors = require('cors');
-app.use(cors());
+app.use(cors({
+    origin: process.env.ALLOWED_ORIGIN,
+    credentials: true,
+}));
 app.options('*', cors());
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
