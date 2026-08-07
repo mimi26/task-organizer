@@ -781,7 +781,7 @@ pg-types@2.2.0:
     postgres-date "~1.0.4"
     postgres-interval "^1.1.0"
 
-pg@8.22.0:
+pg@8.22.0, pg@^8.22.0:
   version "8.22.0"
   resolved "https://registry.yarnpkg.com/pg/-/pg-8.22.0.tgz#55ca3975026180c6dced6eec3a20a844c2dc9237"
   integrity sha512-8wih1vVIBMxoUM2oB4soJsD9tDnDpLv4OXBJ+EJzFsvycD+lfyIreC2gGHq78f8jbLLt+bvlPTFdFZfJkOuzAA==

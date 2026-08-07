@@ -37,6 +37,7 @@
     "pg-promise": "^12.7.0"
   },
   "devDependencies": {
-    "concurrently": "^3.5.1"
+    "concurrently": "^3.5.1",
+    "pg": "^8.22.0"
   }
 }
