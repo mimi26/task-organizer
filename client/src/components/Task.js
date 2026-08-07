@@ -45,8 +45,8 @@ class Task extends Component {
         }
 
         try {
-          const task = await fetch(`/api/tasks/${taskId}`, opts);
-          const resp = await fetch(`/api/tasks/show/${taskId}`);
+          const task = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks/${taskId}`, opts);
+          const resp = await fetch(`${process.env.REACT_APP_API_URL}/api/tasks/show/${taskId}`);
           const editedTask = await resp.json();
           this.setState({ isCrossedOff: editedTask.crossed_off });
         } catch (error) {

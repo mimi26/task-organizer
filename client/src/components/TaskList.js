@@ -27,7 +27,7 @@ class TaskList extends Component {
         let userId = parseInt(this.state.userId);
         if (userId) {
             try {
-                let tasks = await axios(`/api/tasks/${userId}`);
+                let tasks = await axios(`${process.env.REACT_APP_API_URL}/api/tasks/${userId}`);
                 this.setState({
                     tasks: tasks.data
                 });
