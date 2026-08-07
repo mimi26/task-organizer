@@ -7,7 +7,7 @@
     "dev": "npx nodemon server.js --ignore client",
     "client": "node start-client.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "debugger": "DEBUG=*:* nodemon server.js",
+    "debugger": "DEBUG=*:* nodemon server.js"
   },
   "repository": {
     "type": "git",
