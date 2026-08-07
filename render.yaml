@@ -23,7 +23,7 @@ projects:
         destination: /index.html
 
     - type: web
-      name: task-organizer
+      name: task-organizer-api
       runtime: node
       repo: https://github.com/mimi26/task-organizer
       plan: free
