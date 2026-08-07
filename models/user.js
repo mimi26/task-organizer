@@ -1,4 +1,16 @@
-const db = require('../db/config');
+// const db = require('../db/config');
+const options = {
+    receive: (e) => {
+        console.log(e.data);
+    },
+    query: (e) => {
+        console.log(e.query);
+    }
+};
+
+const pgp = require('pg-promise')(options);
+
+const db = pgp(process.env.DATABASE_URL);
 
 const User = {};
 
