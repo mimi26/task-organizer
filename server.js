@@ -57,10 +57,12 @@ const authRoutes = require('./routes/auth-routes.js');
 app.use('/auth', authRoutes);
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
+
+    app.use(express.static(path.join(__dirname, '/client/build')));
+
     //to let react-router handle routing in prod.
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
 }
 
