@@ -7,7 +7,8 @@
     "dev": "npx nodemon server.js --ignore client",
     "client": "node start-client.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "debugger": "DEBUG=*:* nodemon server.js"
+    "debugger": "DEBUG=*:* nodemon server.js",
+    "db:migrate": "psql -f db/migrations/migration-1521479145943.sql; psql -f db/migrations/migration-1533578896047.sql"
   },
   "repository": {
     "type": "git",
