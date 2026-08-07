@@ -13,7 +13,7 @@ const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 3001;
 
-app.listen(port, '0.0.0.0', () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`listening on 0.0.0.0:${PORT}`);
 });
 
