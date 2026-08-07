@@ -72,11 +72,11 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-const { Pool } = require('pg')
+// const { Pool } = require('pg')
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+// const pool = new Pool({
+//   connectionString: process.env.DATABASE_URL,
+// });
 
 app.use('*', (req, res) => {
     res.status(404).send('Not Found');
