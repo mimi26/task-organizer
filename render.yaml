@@ -22,7 +22,6 @@ projects:
             runtime: node
             plan: free
             buildCommand: yarn
-            preDeployCommand: yarn db:migrate
             startCommand: yarn start
             envVars:
               - key: ALLOWED_ORIGIN
