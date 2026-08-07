@@ -118,7 +118,6 @@ class App extends Component {
           messageAlert: ''
         });
       } else {
-        console.log("this is data:", login.data);
         this.setState({ messageAlert: login.data });
       }
     } catch(error) {

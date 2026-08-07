@@ -1,14 +1,14 @@
 # Task Manager App
 
-This is an app for keeping track of things you need to do. Add pending tasks to the list and cross tasks off when they're done. 
+This is an app for keeping track of things you need to do. Add pending tasks to the list and cross tasks off when they're done.
 
 ## Contributors
 
-This was a collaboration between [Andrew Kazinec](https://www.linkedin.com/in/andrewkazinec/) and [Mimi Klein](http://mimiklein.me/). The designs and design concept was crafted into detailed mockups by Andrew, and developed by Mimi. 
+This was a collaboration between [Andrew Kazinec](https://www.linkedin.com/in/andrewkazinec/) and [Mimi Klein](http://mimiklein.me/). The designs and design concept was crafted into detailed mockups by Andrew, and developed by Mimi.
 
 ## Deployed At
 
-https://do-all-the-things.herokuapp.com/
+https://to-do-qn9w.onrender.com/
 
 ## Technologies Used
 

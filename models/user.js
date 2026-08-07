@@ -15,7 +15,6 @@ const db = pgp(process.env.DATABASE_URL);
 const User = {};
 
 User.findByUserName = userName => {
-console.log('***** ~ db:', db);
 
     return db.oneOrNone(
         `
